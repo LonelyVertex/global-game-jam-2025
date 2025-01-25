@@ -178,6 +178,11 @@ public class PlayerController : MonoBehaviour
 
     public void Fire()
     {
+        if (killed)
+        {
+            return;
+        }
+
         if (underwater)
         {
             return;
@@ -226,6 +231,11 @@ public class PlayerController : MonoBehaviour
 
     private void ApplyInputVector()
     {
+        if (killed)
+        {
+            return;
+        }
+
         if (inputVector.x > 0)
         {
             Accelerate();
@@ -331,5 +341,12 @@ public class PlayerController : MonoBehaviour
         rb.angularVelocity = 0.0f;
         killed = true;
         spawnTime = 0.0f;
+    }
+
+    public void Respawn()
+    {
+        killed = false;
+        var spawnLocation = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Count)];
+        gameObject.GetComponentInChildren<PlayerBody>(true).gameObject.SetActive(true);
     }
 }
