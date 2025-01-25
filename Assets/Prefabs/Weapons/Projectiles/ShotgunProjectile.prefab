@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 1940239037672253307}
   - component: {fileID: 717012725723944688}
   - component: {fileID: 2156023158721340065}
-  - component: {fileID: 3643899127937576073}
+  - component: {fileID: 7911097566268848505}
   m_Layer: 7
-  m_Name: PistolProjectile
+  m_Name: ShotgunProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -80,7 +80,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: -1913174729, guid: 3fc907d37c25a40c5a5a722d26030fbf, type: 3}
+  m_Sprite: {fileID: -8914248, guid: 3fc907d37c25a40c5a5a722d26030fbf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -104,7 +104,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 2156023158721340065}
-  speed: 9
+  speed: 7
   playerController: {fileID: 0}
 --- !u!50 &2156023158721340065
 Rigidbody2D:
@@ -133,7 +133,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!60 &3643899127937576073
+--- !u!60 &7911097566268848505
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -171,7 +171,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.05779189, y: 0.10333333}
+    oldSize: {x: 0.056680504, y: 0.11444444}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -179,14 +179,14 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.013892145, y: 0.05368661}
-      - {x: -0.027228735, y: 0.0353488}
-      - {x: -0.027228735, y: -0.043003663}
-      - {x: -0.018893367, y: -0.04967196}
-      - {x: 0.017782256, y: -0.04967196}
-      - {x: 0.031118846, y: -0.04633781}
-      - {x: 0.031118846, y: 0.017010989}
-      - {x: 0.016115181, y: 0.05368661}
+    - - {x: 0.028618233, y: 0.05754579}
+      - {x: -0.021393977, y: 0.05754579}
+      - {x: -0.024728125, y: 0.054211643}
+      - {x: -0.026395198, y: 0.034206755}
+      - {x: -0.026395198, y: -0.05414815}
+      - {x: -0.019726902, y: -0.055815224}
+      - {x: 0.025284087, y: -0.055815224}
+      - {x: 0.028618233, y: -0.050814003}
   m_UseDelaunayMesh: 0
 --- !u!1001 &992993167421123924
 PrefabInstance:

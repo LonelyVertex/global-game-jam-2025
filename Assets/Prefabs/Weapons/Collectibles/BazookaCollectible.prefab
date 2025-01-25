@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponType: 1
-  ammo: 10
+  ammo: 3
 --- !u!60 &6662339192702054566
 PolygonCollider2D:
   m_ObjectHideFlags: 0

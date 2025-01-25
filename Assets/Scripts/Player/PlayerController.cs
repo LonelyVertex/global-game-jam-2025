@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     {
         Pistol,
         RocketLauncher,
+        Shotgun,
         Hands
     }
 
@@ -26,15 +27,18 @@ public class PlayerController : MonoBehaviour
 
     public GameObject gunProjectilePrefab;
     public GameObject rocketProjectilePrefab;
+    public GameObject shotgunProjectilePrefab;
 
     public GameObject pistolWeaponPrefab;
     public GameObject rocketLauncherWeaponPrefab;
+    public GameObject shotgunWeaponPrefab;
 
     public WeaponType currentWeapon = WeaponType.Pistol;
 
     private Dictionary<WeaponType, int> weaponAmmo = new Dictionary<WeaponType, int>
     {
         {WeaponType.RocketLauncher, 0},
+        {WeaponType.Shotgun, 0},
         {WeaponType.Pistol, 0},
         {WeaponType.Hands, 0},
     };
@@ -63,14 +67,22 @@ public class PlayerController : MonoBehaviour
             case WeaponType.Pistol:
                 pistolWeaponPrefab.SetActive(true);
                 rocketLauncherWeaponPrefab.SetActive(false);
+                shotgunWeaponPrefab.SetActive(false);
                 break;
             case WeaponType.RocketLauncher:
                 pistolWeaponPrefab.SetActive(false);
                 rocketLauncherWeaponPrefab.SetActive(true);
+                shotgunWeaponPrefab.SetActive(false);
+                break;
+            case WeaponType.Shotgun:
+                pistolWeaponPrefab.SetActive(false);
+                rocketLauncherWeaponPrefab.SetActive(false);
+                shotgunWeaponPrefab.SetActive(true);
                 break;
             case WeaponType.Hands:
                 pistolWeaponPrefab.SetActive(false);
                 rocketLauncherWeaponPrefab.SetActive(false);
+                shotgunWeaponPrefab.SetActive(false);
                 break;
         }
     }
@@ -106,20 +118,36 @@ public class PlayerController : MonoBehaviour
 
     public void Fire()
     {
+        Debug.Log("Fire");
         if (weaponAmmo[currentWeapon] > 0)
         {
             weaponAmmo[currentWeapon]--;
-
             switch (currentWeapon)
             {
                 case WeaponType.Pistol:
+                    Debug.Log("Firing Pistol");
                     var gunInstance = Instantiate(gunProjectilePrefab, projectileSpawnPoint.position, projectileSpawnPoint.rotation);
                     gunInstance.GetComponent<ProjectileController>().playerController = this;
                     break;
                 case WeaponType.RocketLauncher:
+                    Debug.Log("Firing Rocket Launcher");
                     var rocketInstance = Instantiate(rocketProjectilePrefab, projectileSpawnPoint.position, projectileSpawnPoint.rotation);
                     rocketInstance.GetComponent<ProjectileController>().playerController = this;
                     break;
+                case WeaponType.Shotgun:
+                    Debug.Log("Firing Shotgun");
+                    var shotgunInstance1 = Instantiate(shotgunProjectilePrefab, projectileSpawnPoint.position, projectileSpawnPoint.rotation);
+                    shotgunInstance1.GetComponent<ProjectileController>().playerController = this;
+                    var shotgunInstance2 = Instantiate(shotgunProjectilePrefab, projectileSpawnPoint.position, projectileSpawnPoint.rotation * Quaternion.Euler(0, 0, 5));
+                    shotgunInstance2.GetComponent<ProjectileController>().playerController = this;
+                    var shotgunInstance3 = Instantiate(shotgunProjectilePrefab, projectileSpawnPoint.position, projectileSpawnPoint.rotation * Quaternion.Euler(0, 0, 10));
+                    shotgunInstance3.GetComponent<ProjectileController>().playerController = this;
+                    var shotgunInstance4 = Instantiate(shotgunProjectilePrefab, projectileSpawnPoint.position, projectileSpawnPoint.rotation * Quaternion.Euler(0, 0, -10));
+                    shotgunInstance4.GetComponent<ProjectileController>().playerController = this;
+                    var shotgunInstance5 = Instantiate(shotgunProjectilePrefab, projectileSpawnPoint.position, projectileSpawnPoint.rotation * Quaternion.Euler(0, 0, -5));
+                    shotgunInstance5.GetComponent<ProjectileController>().playerController = this;
+                    break;
+                
             }
             if (weaponAmmo[currentWeapon] == 0)
             {

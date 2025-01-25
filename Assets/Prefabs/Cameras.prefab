@@ -43,7 +43,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4835693232950855252}
   - component: {fileID: 3101984821354111741}
-  - component: {fileID: 1322843749864976920}
   - component: {fileID: 8394420796963446149}
   m_Layer: 0
   m_Name: WakeCamera
@@ -118,14 +117,6 @@ Camera:
   m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &1322843749864976920
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1533997654666452544}
-  m_Enabled: 1
 --- !u!114 &8394420796963446149
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,7 +234,7 @@ Camera:
   m_Depth: 4.17
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 183
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
