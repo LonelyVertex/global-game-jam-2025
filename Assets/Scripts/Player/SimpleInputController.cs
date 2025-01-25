@@ -36,6 +36,11 @@ public class SimpleInputController : MonoBehaviour
             playerController.Fire();
         }
 
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            playerController.SetUnderwater(!playerController.IsUnderwater());
+        }
+
         playerController.SetInputVector(inputVector);
     }
 }

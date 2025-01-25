@@ -9,6 +9,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public PlayerVisualController visualController;
     public Rigidbody2D rb;
     public event Action OnScoreChanged;
     public enum WeaponType
@@ -50,6 +51,13 @@ public class PlayerController : MonoBehaviour
     private Vector4 inputVector = Vector4.zero;
 
     private int score = 0;
+
+    private bool underwater = false;
+
+    void Start()
+    {
+        visualController.SetType(underwater);
+    }
 
     void FixedUpdate()
     {
@@ -119,6 +127,10 @@ public class PlayerController : MonoBehaviour
 
     public void Fire()
     {
+        if (underwater)
+        {
+            return;
+        }
         Debug.Log("Fire");
         if (weaponAmmo[currentWeapon] > 0)
         {
@@ -215,5 +227,16 @@ public class PlayerController : MonoBehaviour
     public int GetScore()
     {
         return score;
+    }
+
+    public void SetUnderwater(bool underwater)
+    {
+        this.underwater = underwater;
+        visualController.SetType(underwater);
+    }
+
+    public bool IsUnderwater()
+    {
+        return underwater;
     }
 }

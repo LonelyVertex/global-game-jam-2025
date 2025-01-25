@@ -484,6 +484,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 352123080a4134571bbe78c53cf58abc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  visualController: {fileID: 2139583067153348419}
   rb: {fileID: 4785921100808007158}
   acceleration: 5
   rotationSpeed: 0.3
