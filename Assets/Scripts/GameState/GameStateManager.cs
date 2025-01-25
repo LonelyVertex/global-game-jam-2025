@@ -15,8 +15,9 @@ public class GameStateManager : MonoBehaviour
     public List<PlayerUIController> PlayerUIControllers = new List<PlayerUIController>();
     [SerializeField]
     public List<DuckSpawner> Spawners = new List<DuckSpawner>();
-    
-    
+
+    private FadeController _fadeController;
+
     public enum GameState
     {
         INIT,
@@ -40,6 +41,12 @@ public class GameStateManager : MonoBehaviour
 
     public void Start()
     {
+        _fadeController = FindFirstObjectByType<FadeController>();
+        if (_fadeController != null)
+        {
+            _fadeController.FadeIn();
+        }
+
         playerInputManager.onPlayerJoined += OnPlayerJoined;
         playerInputManager.onPlayerLeft += OnPlayerLeft;
         State = GameState.INIT;
