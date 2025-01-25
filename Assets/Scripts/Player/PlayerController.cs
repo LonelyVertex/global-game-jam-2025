@@ -121,6 +121,10 @@ public class PlayerController : MonoBehaviour
                     rocketInstance.GetComponent<ProjectileController>().playerController = this;
                     break;
             }
+            if (weaponAmmo[currentWeapon] == 0)
+            {
+                SetNextWeapon();
+            }
         } else {
             SetNextWeapon();
         }
