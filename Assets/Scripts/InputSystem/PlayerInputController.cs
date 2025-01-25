@@ -77,7 +77,8 @@ public class PlayerInputController : MonoBehaviour
 
     private void SpawnPlayer()
     {
-        playerGO = Instantiate(playerPrefab);
+        var spawnPoint = GameStateManager.GetSpawnPoint(playerInput.playerIndex);
+        playerGO = Instantiate(playerPrefab, spawnPoint.position, spawnPoint.rotation);
         playerController = playerGO.GetComponent<PlayerController>();
         var visuals = playerGO.GetComponent<PlayerVisualController>();
         visuals.SetVisuals(playerInput.playerIndex);

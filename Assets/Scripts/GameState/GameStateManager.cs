@@ -12,6 +12,9 @@ public class GameStateManager : MonoBehaviour
     private Dictionary<int, PlayerInputController> playerInputControllers = new Dictionary<int, PlayerInputController>();
     [SerializeField]
     public List<PlayerUIController> PlayerUIControllers = new List<PlayerUIController>();
+    [SerializeField]
+    public List<DuckSpawner> Spawners = new List<DuckSpawner>();
+    
     
     public enum GameState
     {
@@ -119,5 +122,10 @@ public class GameStateManager : MonoBehaviour
     private void FinishGame()
     {
         State = GameState.FINISHED;
+    }
+
+    public Transform GetSpawnPoint(int playerIndex)
+    {
+        return Spawners.Find(spawner => spawner.PlayerIndex == playerIndex).transform;
     }
 }
