@@ -9,6 +9,9 @@ public class PlayerVisualController : MonoBehaviour
     public SpriteRenderer normalSpriteRenderer;
     public SpriteRenderer underwaterSpriteRenderer;
 
+    [Space]
+    public ParticleSystem particleSystem;
+
     public void SetVisuals(int idx)
     {
         normalSpriteRenderer.sprite = normalSprites[idx];
@@ -17,6 +20,16 @@ public class PlayerVisualController : MonoBehaviour
 
     public void SetType(bool underwater)
     {
+
+        if (underwater)
+        {
+            particleSystem.Stop();
+        }
+        else
+        {
+            particleSystem.Play();
+        }
+
         normalSpriteRenderer.gameObject.SetActive(!underwater);
         underwaterSpriteRenderer.gameObject.SetActive(underwater);
     }
