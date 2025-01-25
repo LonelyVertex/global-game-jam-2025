@@ -190,6 +190,7 @@ Transform:
   - {fileID: 2520587438356285635}
   - {fileID: 8639064537180899040}
   - {fileID: 1786709763126877661}
+  - {fileID: 2605537731513577743}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7737834603019945447
@@ -328,6 +329,61 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &8653740858246489523
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2605537731513577743}
+  - component: {fileID: 2829289223179919053}
+  m_Layer: 0
+  m_Name: CollectibleSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2605537731513577743
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8653740858246489523}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 14.5, y: 6.27, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1826311481152704456}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2829289223179919053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8653740858246489523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab2a1b5cf2a414a65a845496c3198ab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxCollectiblesPerType: 2
+  minSpawnTimeoutSeconds: 3
+  radiusToAvoidSpawning: 0.6
+  gameStateManager: {fileID: 6640716731628546804}
+  pistolPrefab: {fileID: 3549638039541874205, guid: 35cb9396c242a4ce992f4283af8ed79b, type: 3}
+  shotgunPrefab: {fileID: 3549638039541874205, guid: 6f47349e6447249f19aa05f73d444332, type: 3}
+  rocketLauncherPrefab: {fileID: 3549638039541874205, guid: fc41ec0a3f5d94e33ae5f853e208126d, type: 3}
+  isDebugEnabled: 0
+  pistolCount: 0
+  shotgunCount: 0
+  rocketLauncherCount: 0
 --- !u!1001 &3262104654951244
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -631,10 +687,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7657478893269850974}
     - target: {fileID: 8539549917789451402, guid: 1b082b36fe5cc4105a8d2e6edc223ec3, type: 3}
-      propertyPath: Spawners.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8539549917789451402, guid: 1b082b36fe5cc4105a8d2e6edc223ec3, type: 3}
       propertyPath: 'Spawners.Array.data[0]'
       value: 
       objectReference: {fileID: 5797290805989355185}
@@ -650,10 +702,6 @@ PrefabInstance:
       propertyPath: 'Spawners.Array.data[3]'
       value: 
       objectReference: {fileID: 5352710025604318000}
-    - target: {fileID: 8539549917789451402, guid: 1b082b36fe5cc4105a8d2e6edc223ec3, type: 3}
-      propertyPath: PlayerUIControllers.Array.size
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 8539549917789451402, guid: 1b082b36fe5cc4105a8d2e6edc223ec3, type: 3}
       propertyPath: 'PlayerUIControllers.Array.data[0]'
       value: 
@@ -739,13 +787,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1826311481152704456}
     m_Modifications:
-    - target: {fileID: 1342060683409725999, guid: af753d60155814ca8a6bf57e18c5ee25, type: 3}
+    - target: {fileID: 4645228160798308006, guid: af753d60155814ca8a6bf57e18c5ee25, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.02
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1342060683409725999, guid: af753d60155814ca8a6bf57e18c5ee25, type: 3}
+    - target: {fileID: 4645228160798308006, guid: af753d60155814ca8a6bf57e18c5ee25, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.18
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645228160798308006, guid: af753d60155814ca8a6bf57e18c5ee25, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4645228160798308006, guid: af753d60155814ca8a6bf57e18c5ee25, type: 3}
       propertyPath: m_LocalRotation.w

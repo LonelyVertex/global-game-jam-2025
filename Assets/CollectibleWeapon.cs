@@ -1,9 +1,11 @@
+using System;
 using UnityEngine;
 
 public class CollectibleWeapon : MonoBehaviour
 {
 
     public PlayerController.WeaponType weaponType;
+    GameStateManager gameStateManager;
     public int ammo = 10;
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -16,7 +18,35 @@ public class CollectibleWeapon : MonoBehaviour
             PlayerController player = other.GetComponentInParent<PlayerController>();
             player.SetAmmo(weaponType, ammo);
             player.SetWeapon(weaponType);
-            Destroy(gameObject);
+            DestroyCollectible();
         }
     }
+
+    private void SetGameStateManager(GameStateManager gameStateManager)
+    {
+        this.gameStateManager = gameStateManager;
+        gameStateManager.OnGameStateChanged += OnGameStateChange;
+    }
+
+    private void OnGameStateChange(GameStateManager.GameState obj)
+    {
+        if (obj == GameStateManager.GameState.INIT)
+        {
+            DestroyCollectible();
+        }
+    }
+
+    private void DestroyCollectible()
+    {
+        OnCollected?.Invoke(this);
+        Destroy(gameObject);
+    }
+
+    private void Start()
+    {
+        OnSpawned?.Invoke(this);
+    }
+
+    public event Action<CollectibleWeapon> OnSpawned;
+    public event Action<CollectibleWeapon> OnCollected;
 }
