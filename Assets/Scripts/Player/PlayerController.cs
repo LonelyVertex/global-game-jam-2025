@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Collections;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEngine;
@@ -42,6 +43,8 @@ public class PlayerController : MonoBehaviour
     /// (acceleration, deceleartion, rotationLeft, rotationRight)
     /// </summary>
     private Vector4 inputVector = Vector4.zero;
+
+    private int score = 0;
 
     void FixedUpdate()
     {
@@ -110,10 +113,12 @@ public class PlayerController : MonoBehaviour
             switch (currentWeapon)
             {
                 case WeaponType.Pistol:
-                    Instantiate(gunProjectilePrefab, projectileSpawnPoint.position, projectileSpawnPoint.rotation);
+                    var gunInstance = Instantiate(gunProjectilePrefab, projectileSpawnPoint.position, projectileSpawnPoint.rotation);
+                    gunInstance.GetComponent<ProjectileController>().playerController = this;
                     break;
                 case WeaponType.RocketLauncher:
-                    Instantiate(rocketProjectilePrefab, projectileSpawnPoint.position, projectileSpawnPoint.rotation);
+                    var rocketInstance = Instantiate(rocketProjectilePrefab, projectileSpawnPoint.position, projectileSpawnPoint.rotation);
+                    rocketInstance.GetComponent<ProjectileController>().playerController = this;
                     break;
             }
         } else {
@@ -146,24 +151,35 @@ public class PlayerController : MonoBehaviour
 
     private void Accelerate()
     {
-        Debug.Log("Accelerated");
+        //Debug.Log("Accelerated");
         rb.AddForce(rb.transform.up * acceleration, ForceMode2D.Force);
     }
 
     private void Decelerate()
     {
-        Debug.Log("Decelerated");
+        //Debug.Log("Decelerated");
         rb.AddForce(-rb.transform.up * acceleration, ForceMode2D.Force);
     }
     private void RotateLeft()
     {
-        Debug.Log("Rotated Left");
+        //Debug.Log("Rotated Left");
         rb.AddTorque(rotationSpeed, ForceMode2D.Force);
     }
 
     private void RotateRight()
     {
-        Debug.Log("Rotated Right");
+        //Debug.Log("Rotated Right");
         rb.AddTorque(-rotationSpeed, ForceMode2D.Force);
+    }
+
+    public void IncremeantScore()
+    {
+        score++;
+        Debug.Log("Score: " + score);
+    }
+
+    public int GetScore()
+    {
+        return score;
     }
 }
