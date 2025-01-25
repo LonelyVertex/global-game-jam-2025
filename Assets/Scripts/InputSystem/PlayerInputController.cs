@@ -79,6 +79,9 @@ public class PlayerInputController : MonoBehaviour
     {
         playerGO = Instantiate(playerPrefab);
         playerController = playerGO.GetComponent<PlayerController>();
+
+        var visuals = playerGO.GetComponent<PlayerVisualController>();
+        visuals.SetVisuals(playerInput.playerIndex);
     }
 
     public void Update()
