@@ -31,6 +31,11 @@ public class SimpleInputController : MonoBehaviour
             inputVector.w = 1;
         }
 
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            playerController.Fire();
+        }
+
         playerController.SetInputVector(inputVector);
     }
 }
