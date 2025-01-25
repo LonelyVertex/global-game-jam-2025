@@ -128,13 +128,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Assets_0
+      name: Duck
       rect:
         serializedVersion: 2
-        x: 2146
-        y: 620
-        width: 191
-        height: 1210
+        x: 100
+        y: 1176
+        width: 576
+        height: 736
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,10 +153,10 @@ TextureImporter:
       name: Assets_1
       rect:
         serializedVersion: 2
-        x: 2164
-        y: 1753
-        width: 36
-        height: 82
+        x: 2053
+        y: 1818
+        width: 52
+        height: 93
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -175,10 +175,10 @@ TextureImporter:
       name: Assets_2
       rect:
         serializedVersion: 2
-        x: 2158
-        y: 1494
-        width: 19
-        height: 54
+        x: 2446
+        y: 1555
+        width: 99
+        height: 379
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -194,33 +194,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Duck
-      rect:
-        serializedVersion: 2
-        x: 1249
-        y: 626
-        width: 588
-        height: 737
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 37f425bda62904346af7937142e27c75
-      internalID: 2029216151
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Assets_4
       rect:
         serializedVersion: 2
-        x: 1951
-        y: 1012
+        x: 2036
+        y: 1309
         width: 81
         height: 372
       alignment: 0
@@ -241,10 +219,10 @@ TextureImporter:
       name: Assets_5
       rect:
         serializedVersion: 2
-        x: 2140
-        y: 732
-        width: 5
-        height: 89
+        x: 2411
+        y: 605
+        width: 170
+        height: 751
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -255,6 +233,94 @@ TextureImporter:
       bones: []
       spriteID: bcb974cfa99084e398508bfd5f77e0dd
       internalID: 213193101
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Assets_3
+      rect:
+        serializedVersion: 2
+        x: 2792
+        y: 970
+        width: 195
+        height: 964
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad9a4757a72c04b229028a8d056215ce
+      internalID: -435770814
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BubbleSmall
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 664
+        width: 102
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71ba9d9586028414989ca65e4a943282
+      internalID: -507697230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BubbleMedium
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 425
+        width: 150
+        height: 150
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8f3d396f3bcc46118b9c1c6533514fe
+      internalID: 2027562555
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BubbleLarge
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 40
+        width: 286
+        height: 288
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e708cf70ffb84d77abd384fb9175734
+      internalID: 2138438677
       vertices: []
       indices: 
       edges: []
@@ -273,12 +339,15 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Assets_0: 1545803484
       Assets_1: 1441252405
       Assets_2: -1913174729
+      Assets_3: -435770814
       Assets_4: -489574864
       Assets_5: 213193101
-      Duck: 2029216151
+      BubbleLarge: 2138438677
+      BubbleMedium: 2027562555
+      BubbleSmall: -507697230
+      Duck: 1545803484
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
