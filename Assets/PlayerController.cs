@@ -10,56 +10,62 @@ public class PlayerController : MonoBehaviour
 
     public Transform bodyTransform;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+/// <summary>
+/// (acceleration, deceleartion, rotationLeft, rotationRight)
+/// </summary>
+    private Vector4 inputVector = Vector4.zero;
+
+    void FixedUpdate()
     {
-        
+        ApplyInputVector();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetInputVector(Vector4 input)
     {
-        if (Input.GetKey(KeyCode.W))
+        inputVector = input;
+    }
+
+    private void ApplyInputVector()
+    {
+        if (inputVector.x > 0)
         {
             Accelerate();
         }
 
-        if (Input.GetKey(KeyCode.S))
+        if (inputVector.y > 0)
         {
             Decelerate();
         }
 
-
-        if (Input.GetKey(KeyCode.A))
+        if (inputVector.z > 0)
         {
             RotateLeft();
         }
 
-        if (Input.GetKey(KeyCode.D))
+        if (inputVector.w > 0)
         {
             RotateRight();
         }
     }
 
-    public void Accelerate()
+    private void Accelerate()
     {
         Debug.Log("Accelerated"); 
-        Debug.Log(rb.transform.up);
         rb.AddForce(rb.transform.up*acceleration, ForceMode2D.Force);
     }
     
-    public void Decelerate()
+    private void Decelerate()
     {
         Debug.Log("Decelerated"); 
         rb.AddForce(-rb.transform.up* acceleration, ForceMode2D.Force);
     }
-    public void RotateLeft()
+    private void RotateLeft()
     {
         Debug.Log("Rotated Left");
         rb.AddTorque(rotationSpeed, ForceMode2D.Force);
     }
 
-        public void RotateRight()
+    private void RotateRight()
     {
         Debug.Log("Rotated Right");
         rb.AddTorque(-rotationSpeed, ForceMode2D.Force);

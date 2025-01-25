@@ -74,8 +74,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 4785921100808007158}
-  acceleration: 0.2
-  rotationSpeed: 0.04
+  acceleration: 5
+  rotationSpeed: 0.3
   bodyTransform: {fileID: 0}
 --- !u!1 &6541827429476491601
 GameObject:
