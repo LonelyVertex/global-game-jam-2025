@@ -156,7 +156,7 @@ public class PlayerController : MonoBehaviour
 
     public void SetAmmo(WeaponType weapon, int ammo)
     {
-        weaponAmmo[weapon] = ammo;
+        weaponAmmo[weapon] += ammo;
         Debug.Log("Set ammo for " + weapon + " to " + ammo);
     }
 
