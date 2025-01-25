@@ -495,7 +495,7 @@ MonoBehaviour:
   pistolWeaponPrefab: {fileID: 5054334369350243583}
   rocketLauncherWeaponPrefab: {fileID: 837815433809354495}
   shotgunWeaponPrefab: {fileID: 6513732437814302681}
-  currentWeapon: 0
+  currentWeapon: 3
 --- !u!114 &2139583067153348419
 MonoBehaviour:
   m_ObjectHideFlags: 0

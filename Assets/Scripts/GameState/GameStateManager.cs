@@ -9,7 +9,9 @@ public class GameStateManager : MonoBehaviour
     [SerializeField]
     private PlayerInputManager playerInputManager;
     
-    private HashSet<PlayerInputController> playerInputControllers = new HashSet<PlayerInputController>();
+    private Dictionary<int, PlayerInputController> playerInputControllers = new Dictionary<int, PlayerInputController>();
+    [SerializeField]
+    public List<PlayerUIController> PlayerUIControllers = new List<PlayerUIController>();
     
     public enum GameState
     {
@@ -48,8 +50,8 @@ public class GameStateManager : MonoBehaviour
     private void OnPlayerJoined(PlayerInput obj)
     {
         var playerInputController = obj.GetComponent<PlayerInputController>();
-        playerInputControllers.Add(playerInputController);
         playerInputController.OnReadyStateChange += OnPlayerReadyStateChange;
+        playerInputControllers.Add(obj.playerIndex, playerInputController);
         if (State == GameState.INIT)
         {
             State = GameState.LOBBY;
@@ -58,8 +60,7 @@ public class GameStateManager : MonoBehaviour
 
     private void OnPlayerLeft(PlayerInput obj)
     {
-        var playerInputController = obj.GetComponent<PlayerInputController>();
-        playerInputControllers.Remove(playerInputController);
+        var playerInputController = playerInputControllers[obj.playerIndex];
         playerInputController.OnReadyStateChange -= OnPlayerReadyStateChange;
         if (playerInputManager.playerCount == 0)
         {
@@ -71,7 +72,7 @@ public class GameStateManager : MonoBehaviour
     {
         if (isPlayerReady)
         {
-            if (playerInputControllers.All(playerInputController => playerInputController.IsPlayerReady))
+            if (playerInputControllers.All(pair => pair.Value.IsPlayerReady))
             {
                 State = GameState.RUNNING;
             }

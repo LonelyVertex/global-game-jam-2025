@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Collections;
@@ -9,7 +10,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public Rigidbody2D rb;
-
+    public event Action OnScoreChanged;
     public enum WeaponType
     {
         Pistol,
@@ -208,6 +209,7 @@ public class PlayerController : MonoBehaviour
     {
         score++;
         Debug.Log("Score: " + score);
+        OnScoreChanged?.Invoke();
     }
 
     public int GetScore()

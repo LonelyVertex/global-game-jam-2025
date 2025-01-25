@@ -17,6 +17,7 @@ public class PlayerUIController : MonoBehaviour
     [SerializeField] private int playerIndex;
     
     private PlayerInputController playerInputController;
+    private PlayerController playerController;
     private GameObject[] allUIObjects;
 
 
@@ -69,6 +70,11 @@ public class PlayerUIController : MonoBehaviour
         playerInputController = obj.GetComponent<PlayerInputController>();
         playerInputController.OnReadyStateChange += OnPlayerReadyStateChange;
         SetJoinedUI();
+    }
+
+    private void OnScoreChanged()
+    {
+        SetKillsValue(playerController.GetScore());
     }
 
     private void OnPlayerReadyStateChange(bool isReady)

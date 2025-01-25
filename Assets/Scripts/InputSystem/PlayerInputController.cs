@@ -79,9 +79,14 @@ public class PlayerInputController : MonoBehaviour
     {
         playerGO = Instantiate(playerPrefab);
         playerController = playerGO.GetComponent<PlayerController>();
-
         var visuals = playerGO.GetComponent<PlayerVisualController>();
         visuals.SetVisuals(playerInput.playerIndex);
+        playerController.OnScoreChanged += OnPlayerScoreChanged;
+    }
+
+    private void OnPlayerScoreChanged()
+    {
+        GameStateManager.PlayerUIControllers[playerInput.playerIndex].SetKillsValue(playerController.GetScore());
     }
 
     public void Update()
@@ -98,12 +103,15 @@ public class PlayerInputController : MonoBehaviour
             var bck = backward.ReadValue<float>();
             var lft = left.ReadValue<float>();
             var rgt = right.ReadValue<float>();
-            var sht = shoot.ReadValue<float>();
+            var sht = shoot.WasPressedThisFrame();
+            if (sht)
+            {
+                playerController.Fire();
+            }
             var dv = dive.ReadValue<float>();
             var j = jump.ReadValue<float>();
             
             playerController.SetInputVector(new Vector4(fwd, bck, lft, rgt));
         }
     }
-
 }
