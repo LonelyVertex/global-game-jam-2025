@@ -71,12 +71,10 @@ public class PlayerController : MonoBehaviour
     private float spawnDownTime = 3.0f;
     private float spawnTime = 0.0f;
 
-<<<<<<< HEAD
+
     private List<GameObject> spawnPoints = new List<GameObject>();
-=======
     float fireCooldown = 1f;
     float lastFireTime = -20f;
->>>>>>> 0250572 (Add fire cooldown)
 
     void OnDrawGizmos()
     {
