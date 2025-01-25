@@ -67,11 +67,16 @@ public class PlayerController : MonoBehaviour
     private float divingCooldownTime = 0.0f;
     private bool divingEnabled = true;
 
-    private bool killed = false;
+    public bool killed = false;
     private float spawnDownTime = 3.0f;
     private float spawnTime = 0.0f;
 
+<<<<<<< HEAD
     private List<GameObject> spawnPoints = new List<GameObject>();
+=======
+    float fireCooldown = 1f;
+    float lastFireTime = -20f;
+>>>>>>> 0250572 (Add fire cooldown)
 
     void OnDrawGizmos()
     {
@@ -194,6 +199,11 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
+        
+        if (lastFireTime + fireCooldown > Time.time)
+        {
+            return;
+        }
 
         Debug.Log("Fire");
         if (weaponAmmo[currentWeapon] > 0)
@@ -229,6 +239,9 @@ public class PlayerController : MonoBehaviour
                     break;
 
             }
+            
+            lastFireTime = Time.time;
+            
             if (weaponAmmo[currentWeapon] == 0)
             {
                 SetNextWeapon();
