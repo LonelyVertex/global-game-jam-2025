@@ -1,0 +1,115 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1233149941 &-7261777582979376638
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Quack_07_{-7261777582979376638}
+  m_AudioClip: {fileID: 8300000, guid: e5c93605d85e11e489bc5506f88aa847, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-6723399636605469572
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Quack_01_{-6723399636605469572}
+  m_AudioClip: {fileID: 8300000, guid: cd9363ec1e59f4c4d9e36ce84de18be8, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-5840208183356170260
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Quack_06_{-5840208183356170260}
+  m_AudioClip: {fileID: 8300000, guid: 13bdf337d26ea8846a22043e983d7eac, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-5486477685076696067
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Quack_05_{-5486477685076696067}
+  m_AudioClip: {fileID: 8300000, guid: 0d1b653e3e986734ca42bb406ed68cc1, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-769763637169718452
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Quack_04_{-769763637169718452}
+  m_AudioClip: {fileID: 8300000, guid: 2e1be75bf52b3704781fed1f50b96619, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &3115020498799015956
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Quack_03_{3115020498799015956}
+  m_AudioClip: {fileID: 8300000, guid: fe7829ef43203264c81f709eb8f557ff, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &3576204890581898230
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Quack_08_{3576204890581898230}
+  m_AudioClip: {fileID: 8300000, guid: 1c6bf8297299cff4f9f4869c8ed683e4, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &5499040799290059923
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Quack_02_{5499040799290059923}
+  m_AudioClip: {fileID: 8300000, guid: 51bfb36c7f7e1b4468e896da913272c2, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1307931743 &6418180475301049370
+AudioRandomContainer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: QuackRandomContainer
+  m_Volume: 0
+  m_Pitch: 0
+  m_AutomaticTriggerTime: 1
+  m_LoopCount: 1
+  m_VolumeRandomizationRange: {x: 0, y: 0}
+  m_PitchRandomizationRange: {x: 0, y: 0}
+  m_AutomaticTriggerTimeRandomizationRange: {x: 0, y: 0}
+  m_LoopCountRandomizationRange: {x: 0, y: 0}
+  m_Elements:
+  - {fileID: -6723399636605469572}
+  - {fileID: 5499040799290059923}
+  - {fileID: 3115020498799015956}
+  - {fileID: -769763637169718452}
+  - {fileID: -5486477685076696067}
+  - {fileID: -5840208183356170260}
+  - {fileID: -7261777582979376638}
+  - {fileID: 3576204890581898230}
+  m_AvoidRepeatingLast: 2
+  m_PlaybackMode: 2
+  m_TriggerMode: 0
+  m_AutomaticTriggerMode: 0
+  m_LoopMode: 2
+  m_VolumeRandomizationEnabled: 0
+  m_PitchRandomizationEnabled: 0
+  m_AutomaticTriggerTimeRandomizationEnabled: 0
+  m_LoopCountRandomizationEnabled: 0

@@ -7,11 +7,14 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class PlayerController : MonoBehaviour
 {
     public PlayerVisualController visualController;
     public Rigidbody2D rb;
+    public PlayerAudioController audioController;
+
     public event Action OnScoreChanged;
     public enum WeaponType
     {
@@ -155,6 +158,8 @@ public class PlayerController : MonoBehaviour
     public void SetWeapon(WeaponType weapon)
     {
         currentWeapon = weapon;
+
+        audioController.SetNextWeapon();
     }
 
     public void SetNextWeapon()
@@ -174,6 +179,8 @@ public class PlayerController : MonoBehaviour
     {
         weaponAmmo[weapon] += ammo;
         Debug.Log("Set ammo for " + weapon + " to " + ammo);
+
+        audioController.CollectiblePickup();
     }
 
     public void Fire()
@@ -187,6 +194,7 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
+
         Debug.Log("Fire");
         if (weaponAmmo[currentWeapon] > 0)
         {
@@ -197,11 +205,13 @@ public class PlayerController : MonoBehaviour
                     Debug.Log("Firing Pistol");
                     var gunInstance = Instantiate(gunProjectilePrefab, projectileSpawnPoint.position, projectileSpawnPoint.rotation);
                     gunInstance.GetComponent<ProjectileController>().playerController = this;
+                    audioController.ShootPistol();
                     break;
                 case WeaponType.RocketLauncher:
                     Debug.Log("Firing Rocket Launcher");
                     var rocketInstance = Instantiate(rocketProjectilePrefab, projectileSpawnPoint.position, projectileSpawnPoint.rotation);
                     rocketInstance.GetComponent<ProjectileController>().playerController = this;
+                    audioController.ShootBazooka();
                     break;
                 case WeaponType.Shotgun:
                     Debug.Log("Firing Shotgun");
@@ -215,6 +225,7 @@ public class PlayerController : MonoBehaviour
                     shotgunInstance4.GetComponent<ProjectileController>().playerController = this;
                     var shotgunInstance5 = Instantiate(shotgunProjectilePrefab, projectileSpawnPoint.position, projectileSpawnPoint.rotation * Quaternion.Euler(0, 0, -5));
                     shotgunInstance5.GetComponent<ProjectileController>().playerController = this;
+                    audioController.ShootShotgun();
                     break;
 
             }
@@ -236,24 +247,34 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
+        var anyInput = false;
         if (inputVector.x > 0)
         {
             Accelerate();
+            anyInput = true;
         }
 
         if (inputVector.y > 0)
         {
             Decelerate();
+            anyInput = true;
         }
 
         if (inputVector.z > 0)
         {
             RotateLeft();
+            anyInput = true;
         }
 
         if (inputVector.w > 0)
         {
             RotateRight();
+            anyInput = true;
+        }
+
+        if (anyInput && Random.Range(0.0f, 1000.0f) < 10.0f)
+        {
+            audioController.Movement();
         }
     }
 
@@ -306,6 +327,7 @@ public class PlayerController : MonoBehaviour
                     this.underwater = underwater;
                     divingTime = 0.0f;
                     visualController.SetType(underwater);
+                    audioController.Rise();
                 }
             }
             else
@@ -316,6 +338,7 @@ public class PlayerController : MonoBehaviour
                     divingTime = 0.0f;
                     this.underwater = underwater;
                     visualController.SetType(underwater);
+                    audioController.Dive();
                 }
             }
         }
