@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6220865984612643155}
   - component: {fileID: 7462752707516133493}
   - component: {fileID: 2536420734262912134}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RocketExplosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4906,6 +4906,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 0}
+  explosionDetergent: {fileID: 3587000695647952497, guid: fda8b69383dd3438ea6833f39908f296, type: 3}
   circleCollider: {fileID: 2536420734262912134}
   colliderRadius:
     serializedVersion: 2

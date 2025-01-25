@@ -6,6 +6,8 @@ public class RocketController : ProjectileController
     
     void OnTriggerEnter2D(Collider2D col)
     {
+        if (col.isTrigger) return;
+        
         SpawnExplosion();
         
         trail.transform.SetParent(null);

@@ -4,6 +4,7 @@ using UnityEngine;
 public class RocketExplosionController : MonoBehaviour
 {
     public PlayerController playerController;
+    public GameObject explosionDetergent;
     public CircleCollider2D circleCollider;
     public AnimationCurve colliderRadius;
     public float destroyAfter;
@@ -16,6 +17,8 @@ public class RocketExplosionController : MonoBehaviour
     void Start()
     {
         _startTime = Time.time;
+        
+        Instantiate(explosionDetergent, transform.position, Quaternion.identity);
         
         Destroy(gameObject, destroyAfter);
     }
