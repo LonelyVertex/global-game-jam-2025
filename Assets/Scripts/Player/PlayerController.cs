@@ -54,6 +54,10 @@ public class PlayerController : MonoBehaviour
 
     private bool underwater = false;
 
+    private float divingTimeLimit = 2.0f;
+    private float divingTime = 0.0f;
+    private bool allowedToDive = true;
+
     void Start()
     {
         visualController.SetType(underwater);
@@ -67,6 +71,14 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         UpdateWeapon();
+        if (underwater)
+        {
+            divingTime += Time.deltaTime;
+            if (divingTime >= divingTimeLimit)
+            {
+                SetUnderwater(false);
+            }
+        }
     }
 
     private void UpdateWeapon()
@@ -231,8 +243,13 @@ public class PlayerController : MonoBehaviour
 
     public void SetUnderwater(bool underwater)
     {
-        this.underwater = underwater;
-        visualController.SetType(underwater);
+        if (underwater != this.underwater)
+        {
+            this.underwater = underwater;
+            divingTime = 0.0f;
+            visualController.SetType(underwater);
+        }
+
     }
 
     public bool IsUnderwater()

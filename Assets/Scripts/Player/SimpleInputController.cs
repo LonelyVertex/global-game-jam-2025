@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class SimpleInputController : MonoBehaviour
 {
@@ -35,10 +36,10 @@ public class SimpleInputController : MonoBehaviour
         {
             playerController.Fire();
         }
-
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            playerController.SetUnderwater(!playerController.IsUnderwater());
+        if (Input.GetKey(KeyCode.Q)) {
+            playerController.SetUnderwater(true);
+        } else {
+            playerController.SetUnderwater(false);
         }
 
         playerController.SetInputVector(inputVector);
