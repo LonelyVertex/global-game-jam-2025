@@ -12,7 +12,8 @@ public class PlayerController : MonoBehaviour
     public enum WeaponType
     {
         Pistol,
-        RocketLauncher
+        RocketLauncher,
+        Hands
     }
 
     public float acceleration = 0.3f;
@@ -29,6 +30,13 @@ public class PlayerController : MonoBehaviour
     public GameObject rocketLauncherWeaponPrefab;
 
     public WeaponType currentWeapon = WeaponType.Pistol;
+
+    private Dictionary<WeaponType, int> weaponAmmo = new Dictionary<WeaponType, int>
+    {
+        {WeaponType.RocketLauncher, 0},
+        {WeaponType.Pistol, 0},
+        {WeaponType.Hands, 0},
+    };
 
     /// <summary>
     /// (acceleration, deceleartion, rotationLeft, rotationRight)
@@ -57,6 +65,10 @@ public class PlayerController : MonoBehaviour
                 pistolWeaponPrefab.SetActive(false);
                 rocketLauncherWeaponPrefab.SetActive(true);
                 break;
+            case WeaponType.Hands:
+                pistolWeaponPrefab.SetActive(false);
+                rocketLauncherWeaponPrefab.SetActive(false);
+                break;
         }
     }
 
@@ -65,16 +77,47 @@ public class PlayerController : MonoBehaviour
         inputVector = input;
     }
 
+    public void SetWeapon(WeaponType weapon)
+    {
+        currentWeapon = weapon;
+    }
+
+    public void SetNextWeapon()
+    {
+        foreach (var weapon in weaponAmmo)
+        {
+            if (weapon.Value > 0)
+            {
+                SetWeapon(weapon.Key);
+                return;
+            }
+        }
+        SetWeapon(WeaponType.Hands);
+    }
+
+    public void SetAmmo(WeaponType weapon, int ammo)
+    {
+        weaponAmmo[weapon] = ammo;
+        Debug.Log("Set ammo for " + weapon + " to " + ammo);
+    } 
+
     public void Fire()
     {
-        switch (currentWeapon)
+        if (weaponAmmo[currentWeapon] > 0)
         {
-            case WeaponType.Pistol:
-                Instantiate(gunProjectilePrefab, projectileSpawnPoint.position, projectileSpawnPoint.rotation);
-                break;
-            case WeaponType.RocketLauncher:
-                Instantiate(rocketProjectilePrefab, projectileSpawnPoint.position, projectileSpawnPoint.rotation);
-                break;
+            weaponAmmo[currentWeapon]--;
+
+            switch (currentWeapon)
+            {
+                case WeaponType.Pistol:
+                    Instantiate(gunProjectilePrefab, projectileSpawnPoint.position, projectileSpawnPoint.rotation);
+                    break;
+                case WeaponType.RocketLauncher:
+                    Instantiate(rocketProjectilePrefab, projectileSpawnPoint.position, projectileSpawnPoint.rotation);
+                    break;
+            }
+        } else {
+            SetNextWeapon();
         }
     }
 
