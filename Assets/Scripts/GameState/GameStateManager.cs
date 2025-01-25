@@ -77,6 +77,7 @@ public class GameStateManager : MonoBehaviour
         {
             State = GameState.INIT;
         }
+        playerInputControllers.Remove(obj.playerIndex);
     }
 
     private void OnPlayerReadyStateChange(bool isPlayerReady)
