@@ -8,6 +8,9 @@ public class ProjectileController : MonoBehaviour
 
     public PlayerController playerController;
 
+    public GameObject trail;
+    public ParticleSystem particleSystem;
+
     void Start()
     {
         rb.AddForce(rb.transform.up * speed, ForceMode2D.Impulse);
@@ -19,6 +22,10 @@ public class ProjectileController : MonoBehaviour
         {
             playerController.IncremeantScore();
         }
+
+        trail.transform.SetParent(null);
+        Destroy(trail, particleSystem.main.duration);
+
         Destroy(gameObject);
     }
 }

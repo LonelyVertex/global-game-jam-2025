@@ -106,6 +106,8 @@ MonoBehaviour:
   rb: {fileID: 2156023158721340065}
   speed: 7
   playerController: {fileID: 0}
+  trail: {fileID: 1656448507624947373}
+  particleSystem: {fileID: 3095268679108854743}
 --- !u!50 &2156023158721340065
 Rigidbody2D:
   serializedVersion: 5
@@ -267,6 +269,16 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4539e37a8b0641bab7ddc198a3011d0, type: 3}
+--- !u!1 &1656448507624947373 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4994177856717411395, guid: b4539e37a8b0641bab7ddc198a3011d0, type: 3}
+  m_PrefabInstance: {fileID: 6030884400738511598}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &3095268679108854743 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8738842680208632121, guid: b4539e37a8b0641bab7ddc198a3011d0, type: 3}
+  m_PrefabInstance: {fileID: 6030884400738511598}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4686098799001527883 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1349495969966214309, guid: b4539e37a8b0641bab7ddc198a3011d0, type: 3}
