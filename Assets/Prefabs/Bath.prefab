@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8283016358144607135}
   m_Layer: 0
   m_Name: Bath
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4933,9 +4933,9 @@ GameObject:
   - component: {fileID: 1769079334960073149}
   - component: {fileID: 5608978780899250724}
   - component: {fileID: 4326706495430746367}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10214,7 +10214,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
