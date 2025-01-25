@@ -15,7 +15,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &490444342822718838
 RectTransform:
   m_ObjectHideFlags: 0
@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 6110103044090394149}
   - component: {fileID: 6575826891249089209}
   - component: {fileID: 3029240264040314306}
+  - component: {fileID: 703386646634977546}
   m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
@@ -142,6 +143,20 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &703386646634977546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4916318998907752435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7599658d55bf46e78ab2cf885e8a14b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameStateManager: {fileID: 6640716731628546804}
+  welcomeScreenUI: {fileID: 4528997693071136567}
 --- !u!1 &7717835017332146795
 GameObject:
   m_ObjectHideFlags: 0

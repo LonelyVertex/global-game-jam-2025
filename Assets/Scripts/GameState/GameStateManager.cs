@@ -36,6 +36,7 @@ public class GameStateManager : MonoBehaviour
     {
         playerInputManager.onPlayerJoined += OnPlayerJoined;
         playerInputManager.onPlayerLeft += OnPlayerLeft;
+        State = GameState.INIT;
     }
 
     public void OnDestroy()
