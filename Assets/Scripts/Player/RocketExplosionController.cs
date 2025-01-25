@@ -35,8 +35,7 @@ public class RocketExplosionController : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             playerController.IncremeantScore();
-            
-            // TODO kill player
+            other.gameObject.GetComponentInParent<PlayerController>().Kill();
         }
         
         var rb = other.gameObject.GetComponentInParent<Rigidbody2D>();

@@ -21,6 +21,7 @@ public class ProjectileController : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             playerController.IncremeantScore();
+            collision.gameObject.GetComponent<PlayerController>().Kill();
         }
 
         trail.transform.SetParent(null);

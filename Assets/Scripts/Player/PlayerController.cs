@@ -64,6 +64,10 @@ public class PlayerController : MonoBehaviour
     private float divingCooldownTime = 0.0f;
     private bool divingEnabled = true;
 
+    private bool killed = false;
+    private float spawnDownTime = 3.0f;
+    private float spawnTime = 0.0f;
+
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -100,6 +104,15 @@ public class PlayerController : MonoBehaviour
                 {
                     divingEnabled = true;
                 }
+            }
+        }
+        if (killed)
+        {
+            spawnTime += Time.deltaTime;
+            if (spawnTime >= spawnDownTime)
+            {
+                killed = false;
+                gameObject.GetComponentInChildren<PlayerBody>(true).gameObject.SetActive(true);
             }
         }
     }
@@ -305,5 +318,15 @@ public class PlayerController : MonoBehaviour
     public bool IsUnderwater()
     {
         return underwater;
+    }
+
+    public void Kill()
+    {
+        Debug.Log("Player Killed");
+        gameObject.GetComponentInChildren<PlayerBody>(true).gameObject.SetActive(false);
+        rb.linearVelocity = Vector2.zero;
+        rb.angularVelocity = 0.0f;
+        killed = true;
+        spawnTime = 0.0f;
     }
 }
