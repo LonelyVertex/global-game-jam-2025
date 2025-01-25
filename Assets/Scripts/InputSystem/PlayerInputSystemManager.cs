@@ -18,25 +18,51 @@ public class PlayerInputSystemManager : MonoBehaviour
     [SerializeField] PlayerInputManager playerInputManager;
     HashSet<KeyValuePair<InputDevice, string>> pairedDevices = new ();
     [SerializeField] GameObject playerPrefab;
+    [SerializeField] GameStateManager gameStateManager;
+    
 
     void Start()
     {
         playerInputManager.onPlayerJoined += OnPlayerJoined;
+        playerInputManager.onPlayerLeft += OnPlayerLeft;
         playerInputManager.playerPrefab = playerPrefab;
         Debug.Log($"Joining enabled: {playerInputManager.joiningEnabled}");
     }
 
-    void OnDestroy()
+    private void OnPlayerLeft(PlayerInput obj)
     {
-        playerInputManager.onPlayerJoined -= OnPlayerJoined;
+        Debug.Log($"Left player: {obj.currentControlScheme}");
+        SetJoiningState();
+        foreach (var inputDevice in obj.devices)
+        {
+            if (IsDevicePaired(inputDevice, obj.currentControlScheme))
+            {
+                pairedDevices.Remove(new KeyValuePair<InputDevice, string>(inputDevice, obj.currentControlScheme));            
+            }
+        }
     }
 
-    private void OnPlayerJoined(PlayerInput playerInput)
+    void SetJoiningState()
     {
         if (playerInputManager.playerCount >= playerInputManager.maxPlayerCount)
         {
             playerInputManager.DisableJoining();
         }
+        if (playerInputManager.playerCount < playerInputManager.maxPlayerCount)
+        {
+            playerInputManager.EnableJoining();
+        }
+    }
+
+    void OnDestroy()
+    {
+        playerInputManager.onPlayerJoined -= OnPlayerJoined;
+        playerInputManager.onPlayerLeft -= OnPlayerLeft;
+    }
+
+    private void OnPlayerJoined(PlayerInput playerInput)
+    {
+        SetJoiningState();
         Debug.Log($"On player joined: n: {playerInput.gameObject.name}, s: {playerInput.currentControlScheme}");
         Debug.Log($"Joining enabled: {playerInputManager.joiningEnabled}");
     }
@@ -84,11 +110,12 @@ public class PlayerInputSystemManager : MonoBehaviour
     {
         pairedDevices.Add(new KeyValuePair<InputDevice, string>(inputDevice, controlScheme));
 
-        playerInputManager.JoinPlayer(
+        var playerInput = playerInputManager.JoinPlayer(
             playerInputManager.playerCount,
             -1,
             controlScheme,
             inputDevice
         );
+        playerInput.GetComponent<PlayerInputController>().GameStateManager = gameStateManager;
     }
 }

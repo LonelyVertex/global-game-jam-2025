@@ -5,6 +5,17 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(PlayerInput))]
 public class PlayerInputController : MonoBehaviour
 {
+    private bool _isPlayerReady = false;
+    private bool IsPlayerReady
+    {
+        get => _isPlayerReady;
+        set
+        {
+            GameStateManager.SetPlayerReadyState(playerInput, value);
+            _isPlayerReady = value;
+        }
+    }
+
     [SerializeField] PlayerInput playerInput;
     [SerializeField] PlayerController playerController;
     InputAction forward;
@@ -16,6 +27,7 @@ public class PlayerInputController : MonoBehaviour
     InputAction jump;
     Vector4 movementVector = new Vector4();
     [SerializeField] private GameObject playerPrefab;
+    public GameStateManager GameStateManager { private get; set; }
     private GameObject playerGO;
 
     public void Start()
@@ -30,55 +42,59 @@ public class PlayerInputController : MonoBehaviour
         dive = playerInput.actions.FindAction(input.Player.Dive.id);
         jump = playerInput.actions.FindAction(input.Player.Jump.id);
         
+        GameStateManager.OnGameStateChanged += OnGameStateChanged;
+        IsPlayerReady = false;
+    }
+
+    public void OnDestroy()
+    {
+        Destroy(playerGO);
+        GameStateManager.PlayerDisconnected(playerInput);
+        GameStateManager.OnGameStateChanged -= OnGameStateChanged;
+    }
+
+    private void OnGameStateChanged(GameStateManager.GameState gameState)
+    {
+        switch (gameState) {
+            case GameStateManager.GameState.INIT:
+                
+                Destroy(this.gameObject);
+
+                break;
+            case GameStateManager.GameState.LOBBY:
+                IsPlayerReady = false;
+                if (playerGO != null) {
+                    Destroy(playerGO);
+                }
+
+                break;
+            case GameStateManager.GameState.RUNNING:
+                SpawnPlayer();
+                break;
+            case GameStateManager.GameState.FINISHED:
+                IsPlayerReady = false;
+                break;
+        }
+    }
+
+    private void SpawnPlayer()
+    {
         playerGO = Instantiate(playerPrefab);
         playerController = playerGO.GetComponent<PlayerController>();
     }
 
     public void Update()
     {
-        var fwd = forward.ReadValue<float>();
-        var bck = backward.ReadValue<float>();
-        var lft = left.ReadValue<float>();
-        var rgt = right.ReadValue<float>();
-        var sht = shoot.ReadValue<float>();
-        var dv = dive.ReadValue<float>();
-        var j = jump.ReadValue<float>();
-        
-        playerController.SetInputVector(new Vector4(fwd, bck, lft, rgt));
-    }
-
-    public void OnForward(InputAction.CallbackContext context)
-    {
-        Debug.Log($"Forward pressed ({gameObject.name}): {context.ReadValueAsButton()}");
-    }
-
-    public void OnBackward(InputAction.CallbackContext context)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void OnLeft(InputAction.CallbackContext context)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void OnRight(InputAction.CallbackContext context)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void OnShoot(InputAction.CallbackContext context)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void OnDive(InputAction.CallbackContext context)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void OnJump(InputAction.CallbackContext context)
-    {
-        throw new NotImplementedException();
+        if (GameStateManager.State == GameStateManager.GameState.RUNNING) {
+            var fwd = forward.ReadValue<float>();
+            var bck = backward.ReadValue<float>();
+            var lft = left.ReadValue<float>();
+            var rgt = right.ReadValue<float>();
+            var sht = shoot.ReadValue<float>();
+            var dv = dive.ReadValue<float>();
+            var j = jump.ReadValue<float>();
+            
+            playerController.SetInputVector(new Vector4(fwd, bck, lft, rgt));
+        }
     }
 }
