@@ -326,7 +326,7 @@ public partial class @UnityInputSystemActions: IInputActionCollection2, IDisposa
                 {
                     ""name"": """",
                     ""id"": ""87d79a07-02db-457a-8bb8-c7cb6292a73b"",
-                    ""path"": ""<Keyboard>/rightMeta"",
+                    ""path"": ""<Keyboard>/rightCtrl"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard2"",
@@ -381,7 +381,7 @@ public partial class @UnityInputSystemActions: IInputActionCollection2, IDisposa
                 {
                     ""name"": """",
                     ""id"": ""3e30193b-c1f0-4af7-bf63-c04e59233ec6"",
-                    ""path"": ""<Keyboard>/comma"",
+                    ""path"": ""<Keyboard>/rightAlt"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard2"",
@@ -436,7 +436,7 @@ public partial class @UnityInputSystemActions: IInputActionCollection2, IDisposa
                 {
                     ""name"": """",
                     ""id"": ""df799c60-30b9-4576-b79e-73d626cd27ba"",
-                    ""path"": ""<Keyboard>/period"",
+                    ""path"": ""<Keyboard>/rightShift"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard2"",

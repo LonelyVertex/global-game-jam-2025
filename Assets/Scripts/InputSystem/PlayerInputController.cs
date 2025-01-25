@@ -6,13 +6,13 @@ using UnityEngine.InputSystem;
 public class PlayerInputController : MonoBehaviour
 {
     private bool _isPlayerReady = false;
-    private bool IsPlayerReady
+    public bool IsPlayerReady
     {
         get => _isPlayerReady;
-        set
+        private set
         {
-            GameStateManager.SetPlayerReadyState(playerInput, value);
             _isPlayerReady = value;
+            OnReadyStateChange?.Invoke(value);
         }
     }
 
@@ -29,6 +29,7 @@ public class PlayerInputController : MonoBehaviour
     [SerializeField] private GameObject playerPrefab;
     public GameStateManager GameStateManager { private get; set; }
     private GameObject playerGO;
+    public event Action<bool> OnReadyStateChange;
 
     public void Start()
     {
@@ -49,7 +50,6 @@ public class PlayerInputController : MonoBehaviour
     public void OnDestroy()
     {
         Destroy(playerGO);
-        GameStateManager.PlayerDisconnected(playerInput);
         GameStateManager.OnGameStateChanged -= OnGameStateChanged;
     }
 
@@ -57,9 +57,7 @@ public class PlayerInputController : MonoBehaviour
     {
         switch (gameState) {
             case GameStateManager.GameState.INIT:
-                
                 Destroy(this.gameObject);
-
                 break;
             case GameStateManager.GameState.LOBBY:
                 IsPlayerReady = false;
@@ -85,6 +83,13 @@ public class PlayerInputController : MonoBehaviour
 
     public void Update()
     {
+        if (GameStateManager.State == GameStateManager.GameState.LOBBY)
+        {
+            var sht = shoot.WasPressedThisFrame();
+            if (sht) {
+                IsPlayerReady = !IsPlayerReady;
+            }
+        }
         if (GameStateManager.State == GameStateManager.GameState.RUNNING) {
             var fwd = forward.ReadValue<float>();
             var bck = backward.ReadValue<float>();
@@ -97,4 +102,5 @@ public class PlayerInputController : MonoBehaviour
             playerController.SetInputVector(new Vector4(fwd, bck, lft, rgt));
         }
     }
+
 }

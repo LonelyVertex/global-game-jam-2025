@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,8 +9,8 @@ public class GameStateManager : MonoBehaviour
     [SerializeField]
     private PlayerInputManager playerInputManager;
     
-    private Dictionary<int, bool> playerReadyStates = new Dictionary<int, bool>();
-
+    private HashSet<PlayerInputController> playerInputControllers = new HashSet<PlayerInputController>();
+    
     public enum GameState
     {
         INIT,
@@ -31,14 +32,49 @@ public class GameStateManager : MonoBehaviour
         }
     }
 
-    public void SetPlayerReadyState(PlayerInput obj, bool isReady)
+    public void Start()
     {
-        playerReadyStates[obj.playerIndex] = isReady;
+        playerInputManager.onPlayerJoined += OnPlayerJoined;
+        playerInputManager.onPlayerLeft += OnPlayerLeft;
     }
 
-    public void PlayerDisconnected(PlayerInput obj)
+    public void OnDestroy()
     {
-        playerReadyStates.Remove(obj.playerIndex);
+        playerInputManager.onPlayerJoined -= OnPlayerJoined;
+        playerInputManager.onPlayerLeft -= OnPlayerLeft;
+    }
+
+    private void OnPlayerJoined(PlayerInput obj)
+    {
+        var playerInputController = obj.GetComponent<PlayerInputController>();
+        playerInputControllers.Add(playerInputController);
+        playerInputController.OnReadyStateChange += OnPlayerReadyStateChange;
+        if (State == GameState.INIT)
+        {
+            State = GameState.LOBBY;
+        }
+    }
+
+    private void OnPlayerLeft(PlayerInput obj)
+    {
+        var playerInputController = obj.GetComponent<PlayerInputController>();
+        playerInputControllers.Remove(playerInputController);
+        playerInputController.OnReadyStateChange -= OnPlayerReadyStateChange;
+        if (playerInputManager.playerCount == 0)
+        {
+            State = GameState.INIT;
+        }
+    }
+
+    private void OnPlayerReadyStateChange(bool isPlayerReady)
+    {
+        if (isPlayerReady)
+        {
+            if (playerInputControllers.All(playerInputController => playerInputController.IsPlayerReady))
+            {
+                State = GameState.RUNNING;
+            }
+        }
     }
 
     public void Update()

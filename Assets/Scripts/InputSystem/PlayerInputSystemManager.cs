@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
@@ -6,17 +7,27 @@ using UnityEngine.InputSystem.LowLevel;
 [RequireComponent(typeof(PlayerInputManager))]
 public class PlayerInputSystemManager : MonoBehaviour
 {
-    private static class ControlScheme
-    {
-        public const string KEYBOARD_1 = "Keyboard1";
-        public const string KEYBOARD_2 = "Keyboard2";
-        public const string KEYBOARD_3 = "Keyboard3";
-        public const string KEYBOARD_4 = "Keyboard4";
-        public const string GAMEPAD = "Gamepad";
+    public enum ControlScheme {
+        KEYBOARD_1,
+        KEYBOARD_2,
+        KEYBOARD_3,
+        KEYBOARD_4,
+        GAMEPAD,
     }
 
+    public Dictionary<ControlScheme, string> ControlSchemeMapping = new ()
+    {
+        { ControlScheme.KEYBOARD_1, "Keyboard1" },
+        { ControlScheme.KEYBOARD_2, "Keyboard2" },
+        { ControlScheme.KEYBOARD_3, "Keyboard3" },
+        { ControlScheme.KEYBOARD_4, "Keyboard4" },
+        { ControlScheme.GAMEPAD, "Gamepad" }
+    };
+
+    public Dictionary<int, ControlScheme> PlayerIndexToControlScheme = new Dictionary<int, ControlScheme>(); 
+
     [SerializeField] PlayerInputManager playerInputManager;
-    HashSet<KeyValuePair<InputDevice, string>> pairedDevices = new ();
+    HashSet<KeyValuePair<InputDevice, ControlScheme>> pairedDevices = new ();
     [SerializeField] GameObject playerPrefab;
     [SerializeField] GameStateManager gameStateManager;
     
@@ -31,13 +42,14 @@ public class PlayerInputSystemManager : MonoBehaviour
 
     private void OnPlayerLeft(PlayerInput obj)
     {
-        Debug.Log($"Left player: {obj.currentControlScheme}");
         SetJoiningState();
+        var controlScheme = PlayerIndexToControlScheme[obj.playerIndex];
         foreach (var inputDevice in obj.devices)
         {
-            if (IsDevicePaired(inputDevice, obj.currentControlScheme))
+            if (IsDevicePaired(inputDevice, controlScheme))
             {
-                pairedDevices.Remove(new KeyValuePair<InputDevice, string>(inputDevice, obj.currentControlScheme));            
+                pairedDevices.Remove(new KeyValuePair<InputDevice, ControlScheme>(inputDevice, controlScheme));
+                PlayerIndexToControlScheme.Remove(obj.playerIndex);
             }
         }
     }
@@ -77,7 +89,7 @@ public class PlayerInputSystemManager : MonoBehaviour
         {
             JoinPlayer(Keyboard.current, ControlScheme.KEYBOARD_1);
         }   
-        if (Keyboard.current[Key.RightMeta].wasPressedThisFrame && !IsDevicePaired(Keyboard.current, ControlScheme.KEYBOARD_2))
+        if (Keyboard.current[Key.RightCtrl].wasPressedThisFrame && !IsDevicePaired(Keyboard.current, ControlScheme.KEYBOARD_2))
         {
             JoinPlayer(Keyboard.current, ControlScheme.KEYBOARD_2);
         }   
@@ -101,19 +113,56 @@ public class PlayerInputSystemManager : MonoBehaviour
             }
         } 
     }
-    bool IsDevicePaired(InputDevice inputDevice, string controlScheme)
+    bool IsDevicePaired(InputDevice inputDevice, ControlScheme controlScheme)
     {
-        return pairedDevices.Contains(new KeyValuePair<InputDevice, string>(inputDevice, controlScheme));
+        return pairedDevices.Contains(new KeyValuePair<InputDevice, ControlScheme>(inputDevice, controlScheme));
     }
 
-    void JoinPlayer(InputDevice inputDevice, string controlScheme)
+    void JoinPlayer(InputDevice inputDevice, ControlScheme controlScheme)
     {
-        pairedDevices.Add(new KeyValuePair<InputDevice, string>(inputDevice, controlScheme));
+        var playerIndex = 0;
+        if (controlScheme == ControlScheme.GAMEPAD) {
+            for (var i = 0; i < 4; i++)
+            {
+                if (!PlayerIndexToControlScheme.ContainsKey(i))
+                {
+                    playerIndex = i;
+                    break;
+                };
+            }
+        }
+        else
+        {
+            switch (controlScheme)
+            {
+                case ControlScheme.KEYBOARD_1:
+                    playerIndex = 0;
+                    break;
+                case ControlScheme.KEYBOARD_2:
+                    playerIndex = 1;
+                    break;
+                case ControlScheme.KEYBOARD_3:
+                    playerIndex = 2;
+                    break;
+                case ControlScheme.KEYBOARD_4:
+                    playerIndex = 3;
+                    break;
+            }
+        }
+
+        if (PlayerIndexToControlScheme.ContainsKey(playerIndex))
+        {
+            Debug.Log($"Controller for playerIndex: {playerIndex} is already taken by scheme: {PlayerIndexToControlScheme[playerIndex]}");
+            return;
+        }
+
+        pairedDevices.Add(new KeyValuePair<InputDevice, ControlScheme>(inputDevice, controlScheme));
+        PlayerIndexToControlScheme[playerIndex] = controlScheme;
 
         var playerInput = playerInputManager.JoinPlayer(
-            playerInputManager.playerCount,
+            playerIndex,
             -1,
-            controlScheme,
+            ControlSchemeMapping[controlScheme],
             inputDevice
         );
         playerInput.GetComponent<PlayerInputController>().GameStateManager = gameStateManager;
