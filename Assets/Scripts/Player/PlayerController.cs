@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Collections;
 using Unity.VisualScripting;
 using UnityEditor;
@@ -37,6 +38,9 @@ public class PlayerController : MonoBehaviour
 
     public WeaponType currentWeapon = WeaponType.Pistol;
 
+    public float underwaterDetectRadius;
+    public LayerMask waterLayer;
+
     private Dictionary<WeaponType, int> weaponAmmo = new Dictionary<WeaponType, int>
     {
         {WeaponType.RocketLauncher, 0},
@@ -59,6 +63,12 @@ public class PlayerController : MonoBehaviour
     private float divingTime = 0.0f;
     private float divingCooldownTime = 0.0f;
     private bool divingEnabled = true;
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, underwaterDetectRadius);
+    }
 
     void Start()
     {
@@ -263,11 +273,14 @@ public class PlayerController : MonoBehaviour
 
             if (!underwater)
             {
-                divingCooldownTime = 0.0f;
-                divingEnabled = false;
-                this.underwater = underwater;
-                divingTime = 0.0f;
-                visualController.SetType(underwater);
+                if (CanRise())
+                {
+                    divingCooldownTime = 0.0f;
+                    divingEnabled = false;
+                    this.underwater = underwater;
+                    divingTime = 0.0f;
+                    visualController.SetType(underwater);
+                }
             }
             else
             {
@@ -281,6 +294,12 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+    }
+
+    bool CanRise()
+    {
+        var colliders = Physics2D.OverlapCircleAll(transform.position, underwaterDetectRadius, waterLayer);
+        return colliders.All(col => col.GetComponent<CollectibleWeapon>());
     }
 
     public bool IsUnderwater()
