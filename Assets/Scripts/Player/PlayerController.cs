@@ -377,6 +377,8 @@ public class PlayerController : MonoBehaviour
         rb.angularVelocity = 0.0f;
         killed = true;
         spawnTime = 0.0f;
+
+        audioController.Death();
     }
 
     public void Respawn()
