@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -87,7 +88,13 @@ public class PlayerInputController : MonoBehaviour
 
     private void OnPlayerScoreChanged()
     {
-        GameStateManager.PlayerUIControllers[playerInput.playerIndex].SetKillsValue(playerController.GetScore());
+        var newScore = playerController.GetScore();
+        GameStateManager.PlayerUIControllers[playerInput.playerIndex].SetKillsValue(newScore);
+        if (newScore >= GameStateManager.ScoreToFinish)
+        {
+            GameStateManager.FinishGame();
+            GameStateManager.PlayerUIControllers[playerInput.playerIndex].SetWinner();
+        }
     }
 
     public void Update()

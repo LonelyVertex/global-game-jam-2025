@@ -89,9 +89,29 @@ public class PlayerInputSystemManager : MonoBehaviour
 
     void Update()
     {
+        var gamepads = Gamepad.all;
+        if (gameStateManager.State == GameStateManager.GameState.FINISHED)
+        {
+            var keyPressedToRestart = Keyboard.current[Key.LeftCtrl].wasPressedThisFrame ||
+                Keyboard.current[Key.RightCtrl].wasPressedThisFrame ||
+                Keyboard.current[Key.Delete].wasPressedThisFrame ||
+                Keyboard.current[Key.NumpadEnter].wasPressedThisFrame;
+            if (keyPressedToRestart)
+            {
+                gameStateManager.RestartGame();
+            }
+            foreach (var g in gamepads)
+            {
+                if (
+                    g[GamepadButton.South].wasPressedThisFrame
+                ) {
+                    gameStateManager.RestartGame();
+                }
+            } 
+            return;
+        }
         if (!playerInputManager.joiningEnabled || !isJoiningEnabled)
         {
-            Debug.Log($"Players cannot join at the moment, player count: {playerInputManager.playerCount}");
             return;
         }
         if (Keyboard.current[Key.LeftCtrl].wasPressedThisFrame && !IsDevicePaired(Keyboard.current, ControlScheme.KEYBOARD_1))
@@ -111,7 +131,6 @@ public class PlayerInputSystemManager : MonoBehaviour
             JoinPlayer(Keyboard.current, ControlScheme.KEYBOARD_4);
         }
         
-        var gamepads = Gamepad.all;
         foreach (var g in gamepads)
         {
             if (

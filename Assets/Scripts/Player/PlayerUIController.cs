@@ -13,12 +13,13 @@ public class PlayerUIController : MonoBehaviour
     [SerializeField] private GameObject readyHintUI;
     [SerializeField] private GameObject readyUI;
     [SerializeField] private GameObject gamePlayUI;
-    [SerializeField] private GameObject finishedGameUI;
+    [SerializeField] private FinishedGamePlayerUIController finishedGameUI;
     [SerializeField] private int playerIndex;
     
     private PlayerInputController playerInputController;
     private PlayerController playerController;
     private GameObject[] allUIObjects;
+    private bool isWinner = false;
 
 
     private void Start()
@@ -29,7 +30,7 @@ public class PlayerUIController : MonoBehaviour
             readyHintUI,
             readyUI,
             gamePlayUI,
-            finishedGameUI
+            finishedGameUI.gameObject
         };
         playerInputManager.onPlayerJoined += OnPlayerJoined;
         playerInputManager.onPlayerLeft += OnPlayerLeft;
@@ -70,11 +71,6 @@ public class PlayerUIController : MonoBehaviour
         playerInputController = obj.GetComponent<PlayerInputController>();
         playerInputController.OnReadyStateChange += OnPlayerReadyStateChange;
         SetJoinedUI();
-    }
-
-    private void OnScoreChanged()
-    {
-        SetKillsValue(playerController.GetScore());
     }
 
     private void OnPlayerReadyStateChange(bool isReady)
@@ -129,11 +125,14 @@ public class PlayerUIController : MonoBehaviour
     public void SetFinishedGameUI()
     {
         HideAllUI();
-        finishedGameUI.SetActive(true);
+        gamePlayUI.SetActive(true);
+        finishedGameUI.gameObject.SetActive(true);
+        finishedGameUI.EnableUI(isWinner);
     }
 
     public void Reset()
     {
+        isWinner = false;
         killsCounter.SetScoreValue(0);
         deathsCounter.SetScoreValue(0);
     }
@@ -147,4 +146,10 @@ public class PlayerUIController : MonoBehaviour
     {
         deathsCounter.SetScoreValue(value);
     }
+
+    public void SetWinner()
+    {
+        isWinner = true;
+    }
+
 }

@@ -44,3 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 408b4081c1e6e4d7baac985109cab365, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerInputManager: {fileID: 0}
+  ScoreToFinish: 6
+  PlayerUIControllers: []
+  Spawners: []

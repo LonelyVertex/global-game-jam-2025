@@ -8,7 +8,8 @@ public class GameStateManager : MonoBehaviour
 {
     [SerializeField]
     private PlayerInputManager playerInputManager;
-    
+    [SerializeField] public int ScoreToFinish;
+
     private Dictionary<int, PlayerInputController> playerInputControllers = new Dictionary<int, PlayerInputController>();
     [SerializeField]
     public List<PlayerUIController> PlayerUIControllers = new List<PlayerUIController>();
@@ -104,7 +105,7 @@ public class GameStateManager : MonoBehaviour
     }
 #endif
 
-    private void RestartGame()
+    public void RestartGame()
     {
         State = GameState.INIT;
     }
@@ -119,7 +120,7 @@ public class GameStateManager : MonoBehaviour
         State = GameState.RUNNING;
     }
 
-    private void FinishGame()
+    public void FinishGame()
     {
         State = GameState.FINISHED;
     }
