@@ -458,7 +458,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDamping: 1
-  m_AngularDamping: 1
+  m_AngularDamping: 5
   m_GravityScale: 0
   m_Material: {fileID: 6200000, guid: 670614c84f3914904b20e8344738639b, type: 2}
   m_IncludeLayers:
@@ -486,7 +486,7 @@ MonoBehaviour:
   visualController: {fileID: 2139583067153348419}
   rb: {fileID: 4785921100808007158}
   acceleration: 5
-  rotationSpeed: 0.3
+  rotationSpeed: 1
   projectileSpawnPoint: {fileID: 572002468135956185}
   projectilePrefab: {fileID: 4748790456761465088, guid: e1d67d2ab293f4b96930cd5df69bd12e, type: 3}
   gunProjectilePrefab: {fileID: 4748790456761465088, guid: e1d67d2ab293f4b96930cd5df69bd12e, type: 3}
