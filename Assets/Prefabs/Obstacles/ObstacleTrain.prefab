@@ -33,6 +33,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2673871037883099181}
+  - {fileID: 6071597428442655803}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5889130061004940840
@@ -491,6 +492,68 @@ PolygonCollider2D:
       - {x: 0.25443193, y: 0.02385554}
       - {x: 0.25289387, y: 0.025393628}
   m_UseDelaunayMesh: 0
+--- !u!1001 &5114113208517894302
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1176753448720789390}
+    m_Modifications:
+    - target: {fileID: 1349495969966214309, guid: b4539e37a8b0641bab7ddc198a3011d0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1349495969966214309, guid: b4539e37a8b0641bab7ddc198a3011d0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1349495969966214309, guid: b4539e37a8b0641bab7ddc198a3011d0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1349495969966214309, guid: b4539e37a8b0641bab7ddc198a3011d0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1349495969966214309, guid: b4539e37a8b0641bab7ddc198a3011d0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1349495969966214309, guid: b4539e37a8b0641bab7ddc198a3011d0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1349495969966214309, guid: b4539e37a8b0641bab7ddc198a3011d0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1349495969966214309, guid: b4539e37a8b0641bab7ddc198a3011d0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1349495969966214309, guid: b4539e37a8b0641bab7ddc198a3011d0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1349495969966214309, guid: b4539e37a8b0641bab7ddc198a3011d0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4994177856717411395, guid: b4539e37a8b0641bab7ddc198a3011d0, type: 3}
+      propertyPath: m_Name
+      value: DuckTrailParticles
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b4539e37a8b0641bab7ddc198a3011d0, type: 3}
+--- !u!4 &6071597428442655803 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1349495969966214309, guid: b4539e37a8b0641bab7ddc198a3011d0, type: 3}
+  m_PrefabInstance: {fileID: 5114113208517894302}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7203377725518875519
 PrefabInstance:
   m_ObjectHideFlags: 0
