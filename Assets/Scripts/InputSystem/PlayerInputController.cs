@@ -15,6 +15,8 @@ public class PlayerInputController : MonoBehaviour
     InputAction dive;
     InputAction jump;
     Vector4 movementVector = new Vector4();
+    [SerializeField] private GameObject playerPrefab;
+    private GameObject playerGO;
 
     public void Start()
     {
@@ -27,6 +29,9 @@ public class PlayerInputController : MonoBehaviour
         shoot = playerInput.actions.FindAction(input.Player.Shoot.id);
         dive = playerInput.actions.FindAction(input.Player.Dive.id);
         jump = playerInput.actions.FindAction(input.Player.Jump.id);
+        
+        playerGO = Instantiate(playerPrefab);
+        playerController = playerGO.GetComponent<PlayerController>();
     }
 
     public void Update()

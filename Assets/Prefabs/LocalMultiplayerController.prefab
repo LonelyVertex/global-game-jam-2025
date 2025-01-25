@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInputManager: {fileID: 3543874642431442265}
-  playerPrefab: {fileID: 4596956068457529361, guid: d994ec1ab490d488cbca83e6ec8215a5, type: 3}
+  playerPrefab: {fileID: 2209948134971775884, guid: 7741e9109c6204c3ea75b603e7ecfe0d, type: 3}
 --- !u!114 &3543874642431442265
 MonoBehaviour:
   m_ObjectHideFlags: 0
