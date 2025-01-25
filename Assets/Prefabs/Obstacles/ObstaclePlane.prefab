@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7424748956742556584}
   - component: {fileID: 6746293068580900914}
   - component: {fileID: 6395789577300566736}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ObstaclePlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}

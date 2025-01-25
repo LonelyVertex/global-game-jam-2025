@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3872594285001795448}
   - component: {fileID: 807043948493944949}
   - component: {fileID: 4060498514500190006}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ObstacleCar
   m_TagString: Untagged
   m_Icon: {fileID: 0}

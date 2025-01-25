@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3384879527325198763}
   - component: {fileID: 7945187384765839976}
   - component: {fileID: 6662339192702054566}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BazookaCollectible
   m_TagString: Untagged
   m_Icon: {fileID: 0}
