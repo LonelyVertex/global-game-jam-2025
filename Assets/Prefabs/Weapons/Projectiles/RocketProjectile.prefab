@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3232709041541963699}
   - component: {fileID: 1940239037672253307}
-  - component: {fileID: 717012725723944688}
+  - component: {fileID: 8433875777621420323}
   - component: {fileID: 2156023158721340065}
   - component: {fileID: 4672335293414278404}
   m_Layer: 7
@@ -91,7 +91,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &717012725723944688
+--- !u!114 &8433875777621420323
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4748790456761465088}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94bcd902d072545fb987377923f2ad38, type: 3}
+  m_Script: {fileID: 11500000, guid: af84be8ef5fda4d8d9d5fdee701353ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 2156023158721340065}
@@ -108,6 +108,7 @@ MonoBehaviour:
   playerController: {fileID: 0}
   trail: {fileID: 1656448507624947373}
   particleSystem: {fileID: 3095268679108854743}
+  explosionPrefab: {fileID: 2885216280839149431, guid: 191d63a92198a451894cff6db12e8e6f, type: 3}
 --- !u!50 &2156023158721340065
 Rigidbody2D:
   serializedVersion: 5
@@ -165,7 +166,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
