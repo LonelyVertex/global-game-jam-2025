@@ -19,7 +19,7 @@ MonoBehaviour:
       x: 839
       y: -1432
       width: 474
-      height: 2259
+      height: 1797
     contents:
     - model: {fileID: 8926484042661614608}
       id: 0
@@ -33,6 +33,12 @@ MonoBehaviour:
     - model: {fileID: 8926484042661614681}
       id: 0
       isStickyNote: 0
+    - model: {fileID: 8926484042661615333}
+      id: 0
+      isStickyNote: 0
+    - model: {fileID: 8926484042661615418}
+      id: 0
+      isStickyNote: 0
   stickyNoteInfos: []
   categories: []
   uiBounds:
@@ -40,7 +46,7 @@ MonoBehaviour:
     x: 43
     y: -1432
     width: 1270
-    height: 2155
+    height: 2091
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -116,8 +122,8 @@ VisualEffectResource:
       lightProbeUsage: 0
     m_CullingFlags: 3
     m_UpdateMode: 0
-    m_PreWarmDeltaTime: 0.05
-    m_PreWarmStepCount: 0
+    m_PreWarmDeltaTime: 2
+    m_PreWarmStepCount: 10
     m_InitialEventName: OnPlay
     m_InstancingMode: 0
     m_InstancingCapacity: 64
@@ -258,7 +264,7 @@ MonoBehaviour:
   m_Children:
   - {fileID: 8926484042661615333}
   - {fileID: 8926484042661615418}
-  m_UIPosition: {x: 864, y: -39}
+  m_UIPosition: {x: 864, y: -397}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots: []
@@ -293,7 +299,7 @@ MonoBehaviour:
   m_UIIgnoredErrors: []
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
-  m_UIPosition: {x: 864, y: 398}
+  m_UIPosition: {x: 864, y: 40}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
@@ -2693,7 +2699,7 @@ MonoBehaviour:
   m_UIIgnoredErrors: []
   m_Parent: {fileID: 8926484042661614662}
   m_Children: []
-  m_UIPosition: {x: 0, y: 0}
+  m_UIPosition: {x: 0, y: 2}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
@@ -3777,7 +3783,7 @@ MonoBehaviour:
   m_UIIgnoredErrors: []
   m_Parent: {fileID: 8926484042661614662}
   m_Children: []
-  m_UIPosition: {x: 0, y: 0}
+  m_UIPosition: {x: 0, y: 75}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
