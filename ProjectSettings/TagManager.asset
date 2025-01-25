@@ -6,6 +6,7 @@ TagManager:
   tags:
   - AREA_BORDER
   - Obstacle
+  - SpawnPoint
   layers:
   - Default
   - TransparentFX

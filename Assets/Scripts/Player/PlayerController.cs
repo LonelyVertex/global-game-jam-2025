@@ -68,6 +68,8 @@ public class PlayerController : MonoBehaviour
     private float spawnDownTime = 3.0f;
     private float spawnTime = 0.0f;
 
+    private List<GameObject> spawnPoints = new List<GameObject>();
+
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -77,6 +79,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         visualController.SetType(underwater);
+        spawnPoints.AddRange(GameObject.FindGameObjectsWithTag("SpawnPoint"));
     }
 
     void FixedUpdate()
