@@ -55,8 +55,10 @@ public class PlayerController : MonoBehaviour
     private bool underwater = false;
 
     private float divingTimeLimit = 2.0f;
+    private float divingCooldown = 4.0f;
     private float divingTime = 0.0f;
-    private bool allowedToDive = true;
+    private float divingCooldownTime = 0.0f;
+    private bool divingEnabled = true;
 
     void Start()
     {
@@ -77,6 +79,17 @@ public class PlayerController : MonoBehaviour
             if (divingTime >= divingTimeLimit)
             {
                 SetUnderwater(false);
+            }
+        }
+        else
+        {
+            if (!divingEnabled)
+            {
+                divingCooldownTime += Time.deltaTime;
+                if (divingCooldownTime >= divingCooldown)
+                {
+                    divingEnabled = true;
+                }
             }
         }
     }
@@ -135,7 +148,7 @@ public class PlayerController : MonoBehaviour
     {
         weaponAmmo[weapon] = ammo;
         Debug.Log("Set ammo for " + weapon + " to " + ammo);
-    } 
+    }
 
     public void Fire()
     {
@@ -172,13 +185,15 @@ public class PlayerController : MonoBehaviour
                     var shotgunInstance5 = Instantiate(shotgunProjectilePrefab, projectileSpawnPoint.position, projectileSpawnPoint.rotation * Quaternion.Euler(0, 0, -5));
                     shotgunInstance5.GetComponent<ProjectileController>().playerController = this;
                     break;
-                
+
             }
             if (weaponAmmo[currentWeapon] == 0)
             {
                 SetNextWeapon();
             }
-        } else {
+        }
+        else
+        {
             SetNextWeapon();
         }
     }
@@ -245,9 +260,25 @@ public class PlayerController : MonoBehaviour
     {
         if (underwater != this.underwater)
         {
-            this.underwater = underwater;
-            divingTime = 0.0f;
-            visualController.SetType(underwater);
+
+            if (!underwater)
+            {
+                divingCooldownTime = 0.0f;
+                divingEnabled = false;
+                this.underwater = underwater;
+                divingTime = 0.0f;
+                visualController.SetType(underwater);
+            }
+            else
+            {
+                if (divingEnabled)
+                {
+                    divingEnabled = false;
+                    divingTime = 0.0f;
+                    this.underwater = underwater;
+                    visualController.SetType(underwater);
+                }
+            }
         }
 
     }
