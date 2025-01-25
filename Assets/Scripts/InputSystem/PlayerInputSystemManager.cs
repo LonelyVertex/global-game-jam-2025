@@ -30,12 +30,14 @@ public class PlayerInputSystemManager : MonoBehaviour
     HashSet<KeyValuePair<InputDevice, ControlScheme>> pairedDevices = new ();
     [SerializeField] GameObject playerPrefab;
     [SerializeField] GameStateManager gameStateManager;
+    private bool isJoiningEnabled = false;
     
 
     void Start()
     {
         playerInputManager.onPlayerJoined += OnPlayerJoined;
         playerInputManager.onPlayerLeft += OnPlayerLeft;
+        gameStateManager.OnGameStateChanged += OnGameStateChanged;
         playerInputManager.playerPrefab = playerPrefab;
         Debug.Log($"Joining enabled: {playerInputManager.joiningEnabled}");
     }
@@ -70,6 +72,12 @@ public class PlayerInputSystemManager : MonoBehaviour
     {
         playerInputManager.onPlayerJoined -= OnPlayerJoined;
         playerInputManager.onPlayerLeft -= OnPlayerLeft;
+        gameStateManager.OnGameStateChanged -= OnGameStateChanged;
+    }
+
+    private void OnGameStateChanged(GameStateManager.GameState obj)
+    {
+        isJoiningEnabled = obj == GameStateManager.GameState.INIT || obj == GameStateManager.GameState.LOBBY;
     }
 
     private void OnPlayerJoined(PlayerInput playerInput)
@@ -81,8 +89,9 @@ public class PlayerInputSystemManager : MonoBehaviour
 
     void Update()
     {
-        if (!playerInputManager.joiningEnabled)
+        if (!playerInputManager.joiningEnabled || !isJoiningEnabled)
         {
+            Debug.Log($"Players cannot join at the moment, player count: {playerInputManager.playerCount}");
             return;
         }
         if (Keyboard.current[Key.LeftCtrl].wasPressedThisFrame && !IsDevicePaired(Keyboard.current, ControlScheme.KEYBOARD_1))
