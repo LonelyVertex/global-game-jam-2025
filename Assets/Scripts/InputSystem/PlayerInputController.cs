@@ -117,6 +117,7 @@ public class PlayerInputController : MonoBehaviour
                 playerController.Fire();
             }
             var dv = dive.ReadValue<float>();
+            playerController.SetUnderwater(dv > 0);
             var j = jump.ReadValue<float>();
             
             playerController.SetInputVector(new Vector4(fwd, bck, lft, rgt));
