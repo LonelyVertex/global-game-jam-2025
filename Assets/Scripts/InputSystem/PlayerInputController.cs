@@ -27,7 +27,6 @@ public class PlayerInputController : MonoBehaviour
     InputAction dive;
     InputAction jump;
     Vector4 movementVector = new Vector4();
-    [SerializeField] private GameObject playerPrefab;
     public GameStateManager GameStateManager { private get; set; }
     private GameObject playerGO;
     public event Action<bool> OnReadyStateChange;
@@ -65,10 +64,8 @@ public class PlayerInputController : MonoBehaviour
                 if (playerGO != null) {
                     Destroy(playerGO);
                 }
-
                 break;
             case GameStateManager.GameState.RUNNING:
-                SpawnPlayer();
                 break;
             case GameStateManager.GameState.FINISHED:
                 IsPlayerReady = false;
@@ -76,61 +73,39 @@ public class PlayerInputController : MonoBehaviour
         }
     }
 
-    private void SpawnPlayer()
+    public void SetGameObject(GameObject gameObject)
     {
-        var spawnPoint = GameStateManager.GetSpawnPoint(playerInput.playerIndex);
-        playerGO = Instantiate(playerPrefab, spawnPoint.position, spawnPoint.rotation);
+        playerGO = gameObject;
         playerController = playerGO.GetComponent<PlayerController>();
-        var visuals = playerGO.GetComponent<PlayerVisualController>();
-        visuals.SetVisuals(playerInput.playerIndex);
-        playerController.OnScoreChanged += OnPlayerScoreChanged;
-        playerController.OnDeathCountChanged += OnPlayerDeathCountChanged;
-    }
-
-    private void OnPlayerScoreChanged()
-    {
-        var newScore = playerController.GetScore();
-        GameStateManager.PlayerUIControllers[playerInput.playerIndex].SetKillsValue(newScore);
-        if (newScore >= GameStateManager.ScoreToFinish)
-        {
-            GameStateManager.FinishGame();
-            GameStateManager.PlayerUIControllers[playerInput.playerIndex].SetWinner();
-            //Destroy all projectiles
-            var projectiles = FindObjectsOfType<ProjectileController>();
-            Array.ForEach(projectiles, p => p.DestroyProjectile());
-        }
-    }
-
-    private void OnPlayerDeathCountChanged()
-    {
-        var newDeathCount = playerController.GetDeathCount();
-        GameStateManager.PlayerUIControllers[playerInput.playerIndex].SetDeathsValue(newDeathCount);
     }
 
     public void Update()
     {
+        var sht = shoot.WasPressedThisFrame();
         if (GameStateManager.State == GameStateManager.GameState.LOBBY)
         {
-            var sht = shoot.WasPressedThisFrame();
             if (sht) {
                 IsPlayerReady = !IsPlayerReady;
             }
+            return;
         }
-        if (GameStateManager.State == GameStateManager.GameState.RUNNING) {
-            var fwd = forward.ReadValue<float>();
-            var bck = backward.ReadValue<float>();
-            var lft = left.ReadValue<float>();
-            var rgt = right.ReadValue<float>();
-            var sht = shoot.WasPressedThisFrame();
-            if (sht)
-            {
-                playerController.Fire();
-            }
-            var dv = dive.ReadValue<float>();
-            playerController.SetUnderwater(dv > 0);
-            var j = jump.ReadValue<float>();
-            
-            playerController.SetInputVector(new Vector4(fwd, bck, lft, rgt));
+
+        if (playerController == null)
+        {
+            return;
         }
+        var fwd = forward.ReadValue<float>();
+        var bck = backward.ReadValue<float>();
+        var lft = left.ReadValue<float>();
+        var rgt = right.ReadValue<float>();
+        if (sht)
+        {
+            playerController.Fire();
+        }
+        var dv = dive.ReadValue<float>();
+        playerController.SetUnderwater(dv > 0);
+        var j = jump.ReadValue<float>();
+        
+        playerController.SetInputVector(new Vector4(fwd, bck, lft, rgt));
     }
 }

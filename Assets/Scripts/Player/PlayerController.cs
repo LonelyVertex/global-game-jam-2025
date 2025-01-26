@@ -15,8 +15,7 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D rb;
     public PlayerAudioController audioController;
 
-    public event Action OnScoreChanged;
-    public event Action OnDeathCountChanged;
+    public event Action<PlayerController> OnScoreChanged;
     public enum WeaponType
     {
         Pistol,
@@ -82,6 +81,8 @@ public class PlayerController : MonoBehaviour
     private List<GameObject> spawnPoints = new List<GameObject>();
     float fireCooldown = 1f;
     float lastFireTime = -20f;
+    public int PlayerIndex = 0;
+    public GameStateManager gameStateManager;
 
     void OnDrawGizmos()
     {
@@ -97,6 +98,10 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (gameStateManager.State != GameStateManager.GameState.RUNNING)
+        {
+            return;
+        }
         ApplyInputVector();
         if (killed)
         {
@@ -194,6 +199,11 @@ public class PlayerController : MonoBehaviour
 
     public void Fire()
     {
+        if (gameStateManager.State != GameStateManager.GameState.RUNNING)
+        {
+            return;
+        }
+
         if (killed)
         {
             return;
@@ -322,14 +332,14 @@ public class PlayerController : MonoBehaviour
     {
         score++;
         Debug.Log("Score: " + score);
-        OnScoreChanged?.Invoke();
+        OnScoreChanged?.Invoke(this);
     }
 
     public void ReduceScore()
     {
         score = Math.Max(0, score - 1);
         Debug.Log("Score: " + score);
-        OnScoreChanged?.Invoke();
+        OnScoreChanged?.Invoke(this);
     }
 
     public int GetScore()
@@ -344,6 +354,11 @@ public class PlayerController : MonoBehaviour
 
     public void SetUnderwater(bool underwater)
     {
+        if (gameStateManager.State != GameStateManager.GameState.RUNNING)
+        {
+            return;
+        }
+
         if (killed)
         {
             return;
@@ -399,8 +414,7 @@ public class PlayerController : MonoBehaviour
         killed = true;
         deathCount++;
         InitPlayerState();
-        OnDeathCountChanged?.Invoke();
-
+        OnScoreChanged?.Invoke(this);
         audioController.Death();
     }
 

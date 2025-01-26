@@ -56,3 +56,5 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  AIBotPrefab: {fileID: 8915364146085229006, guid: 6fe35a856025546aebc0808460715210, type: 3}
+  LocalPlayerPrefab: {fileID: 4596956068457529361, guid: d994ec1ab490d488cbca83e6ec8215a5, type: 3}

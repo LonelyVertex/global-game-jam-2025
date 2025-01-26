@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,11 +11,17 @@ public class GameStateManager : MonoBehaviour
     private PlayerInputManager playerInputManager;
     [SerializeField] public int ScoreToFinish;
 
+    private HashSet<int> localPlayerIndices = new HashSet<int>();
     private Dictionary<int, PlayerInputController> playerInputControllers = new Dictionary<int, PlayerInputController>();
     [SerializeField]
     public List<PlayerUIController> PlayerUIControllers = new List<PlayerUIController>();
     [SerializeField]
     public List<DuckSpawner> Spawners = new List<DuckSpawner>();
+    [SerializeField]
+    public GameObject AIBotPrefab;
+    [SerializeField]
+    public GameObject LocalPlayerPrefab;
+    
 
     private FadeController _fadeController;
 
@@ -36,6 +43,10 @@ public class GameStateManager : MonoBehaviour
         {
             _state = value;
             OnGameStateChanged?.Invoke(_state);
+            if (value == GameState.RUNNING)
+            {
+                SpawnPlayers();
+            }
         }
     }
 
@@ -68,6 +79,31 @@ public class GameStateManager : MonoBehaviour
             State = GameState.LOBBY;
         }
     }
+
+    public void SpawnPlayers()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            var spawnPoint = GetSpawnPoint(i);
+            var playerPrefab = playerInputControllers.ContainsKey(i) ? LocalPlayerPrefab : AIBotPrefab; 
+            var playerGO = Instantiate(playerPrefab, spawnPoint.position, spawnPoint.rotation);
+            var playerController = playerGO.GetComponentInChildren<PlayerController>();
+            var visuals = playerGO.GetComponentInChildren<PlayerVisualController>();
+            visuals.SetVisuals(i);
+            playerController.PlayerIndex = i;
+            playerController.gameStateManager = this;
+            playerController.OnScoreChanged += OnPlayerScoreChanged;
+            var pic = playerInputControllers.ContainsKey(i) ? playerInputControllers[i] : null;
+            pic?.SetGameObject(playerGO);
+        }
+    }
+
+    private void OnPlayerScoreChanged(PlayerController player)
+    {
+        PlayerUIControllers[player.PlayerIndex].SetKillsValue(player.GetScore());
+        PlayerUIControllers[player.PlayerIndex].SetDeathsValue(player.GetDeathCount());
+    }
+
 
     private void OnPlayerLeft(PlayerInput obj)
     {
