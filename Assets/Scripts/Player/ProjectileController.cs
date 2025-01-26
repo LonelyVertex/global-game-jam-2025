@@ -10,6 +10,7 @@ public class ProjectileController : MonoBehaviour
 
     public GameObject trail;
     public ParticleSystem particleSystem;
+    public AudioSource audioSource;
 
     void Start()
     {
@@ -44,6 +45,8 @@ public class ProjectileController : MonoBehaviour
     {
         trail.transform.SetParent(null);
         Destroy(trail, particleSystem.main.startLifetime.constant);
+
+        audioSource.Play();
 
         Destroy(gameObject);
     }

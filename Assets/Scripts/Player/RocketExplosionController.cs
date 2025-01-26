@@ -10,6 +10,7 @@ public class RocketExplosionController : MonoBehaviour
     public float destroyAfter;
     public float maxColliderRadius;
     public float force;
+    public AudioSource audioSource;
 
     float _startTime;
     HashSet<Rigidbody2D> _rigidbodies = new();
@@ -17,6 +18,7 @@ public class RocketExplosionController : MonoBehaviour
     void Start()
     {
         _startTime = Time.time;
+        audioSource.Play();
 
         Instantiate(explosionDetergent, transform.position, Quaternion.identity);
 
