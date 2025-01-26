@@ -8,13 +8,16 @@ public class CollectibleWeapon : MonoBehaviour
     GameStateManager gameStateManager;
     public int ammo = 10;
 
+    public bool collected = false;
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("CollectibleWeapon.OnTriggerEnter2D");
         Debug.Log("other.tag: " + other.tag);
         Debug.Log("other.name: " + other.name);
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !collected)
         {
+            collected = true;
             PlayerController player = other.GetComponentInParent<PlayerController>();
             player.SetAmmo(weaponType, ammo);
             player.SetWeapon(weaponType);
