@@ -101,8 +101,8 @@ public class BotController : MonoBehaviour
 
         if (!closestPlayer)
         {
-            Debug.Log("No players found, fallback to driving");
-            UpdateDriving();
+            Debug.Log("No players found, fallback to weapon search");
+            UpdateWeaponSearch();
             return;
         }
         
@@ -228,7 +228,7 @@ public class BotController : MonoBehaviour
     bool ShouldShoot()
     {
         var players = FindOtherPlayers();
-        var playersInSight = players.Any(player => FindAngle(player.transform) < 30);
+        var playersInSight = players.Any(player => FindAngle(player.transform) < 40);
 
         if (playersInSight && pc.currentWeapon == PlayerController.WeaponType.RocketLauncher)
         {
@@ -253,7 +253,8 @@ public class BotController : MonoBehaviour
 
     IEnumerable<PlayerController> FindOtherPlayers()
     {
-        return FindObjectsByType<PlayerController>(FindObjectsSortMode.None).Where(otherPc => pc != otherPc && !otherPc.killed);
+        return FindObjectsByType<PlayerController>(FindObjectsSortMode.None)
+            .Where(otherPc => pc != otherPc && !otherPc.killed && !otherPc.IsUnderwater());
     }
     
     void Log(string msg)
