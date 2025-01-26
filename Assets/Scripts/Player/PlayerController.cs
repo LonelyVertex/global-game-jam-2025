@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     public PlayerAudioController audioController;
 
     public event Action OnScoreChanged;
+    public event Action OnDeathCountChanged;
     public enum WeaponType
     {
         Pistol,
@@ -63,6 +64,7 @@ public class PlayerController : MonoBehaviour
     private Vector4 inputVector = Vector4.zero;
 
     private int score = 0;
+    private int deathCount = 0;
 
     private bool underwater = false;
 
@@ -335,6 +337,11 @@ public class PlayerController : MonoBehaviour
         return score;
     }
 
+    public int GetDeathCount()
+    {
+        return deathCount;
+    }
+
     public void SetUnderwater(bool underwater)
     {
         if (killed)
@@ -390,7 +397,9 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Player Killed");
         gameObject.GetComponentInChildren<PlayerBody>(true).gameObject.SetActive(false);
         killed = true;
+        deathCount++;
         InitPlayerState();
+        OnDeathCountChanged?.Invoke();
 
         audioController.Death();
     }

@@ -84,6 +84,7 @@ public class PlayerInputController : MonoBehaviour
         var visuals = playerGO.GetComponent<PlayerVisualController>();
         visuals.SetVisuals(playerInput.playerIndex);
         playerController.OnScoreChanged += OnPlayerScoreChanged;
+        playerController.OnDeathCountChanged += OnPlayerDeathCountChanged;
     }
 
     private void OnPlayerScoreChanged()
@@ -95,6 +96,12 @@ public class PlayerInputController : MonoBehaviour
             GameStateManager.FinishGame();
             GameStateManager.PlayerUIControllers[playerInput.playerIndex].SetWinner();
         }
+    }
+
+    private void OnPlayerDeathCountChanged()
+    {
+        var newDeathCount = playerController.GetDeathCount();
+        GameStateManager.PlayerUIControllers[playerInput.playerIndex].SetDeathsValue(newDeathCount);
     }
 
     public void Update()
