@@ -722,14 +722,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movement: {fileID: 6618951738989492608}
   pistol: {fileID: 980204323192556386}
-  shotgun: {fileID: 980204323192556386}
+  shotgun: {fileID: 6518716105982135018}
   bazooka: {fileID: 2233546988310271296}
   nextWeapon: {fileID: 611012764516070048}
   dive: {fileID: 6024171750470085280}
   death: {fileID: 2107681280845247632}
   rise: {fileID: 6024171750470085280}
   collectiblePickup: {fileID: 520791697173198270}
-  obstacleHit: {fileID: 6333680110903048048}
   duckSpawned: {fileID: 6418865694643921056}
 --- !u!82 &6618951738989492608
 AudioSource:
@@ -1324,7 +1323,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 7454700996280553706, guid: a97093d0496a62f42905a7a877452a4d, type: 2}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
+  m_Resource: {fileID: 6418180475301049370, guid: 46b3c3679c0c0d842a8e19045b8aab1d, type: 2}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
