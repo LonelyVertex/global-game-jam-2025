@@ -14,8 +14,9 @@ public class GameStateManager : MonoBehaviour
     private PlayerInputManager playerInputManager;
     [SerializeField] public int ScoreToFinish;
 
-    private HashSet<int> localPlayerIndices = new HashSet<int>();
+    private Dictionary<int, PlayerController> playerControllers = new Dictionary<int, PlayerController>();
     private Dictionary<int, PlayerInputController> playerInputControllers = new Dictionary<int, PlayerInputController>();
+    private List<GameObject> spawnedPlayers = new List<GameObject>();
     [SerializeField]
     public List<PlayerUIController> PlayerUIControllers = new List<PlayerUIController>();
     [SerializeField]
@@ -55,6 +56,16 @@ public class GameStateManager : MonoBehaviour
             {
                 SpawnPlayers();
             }
+
+            foreach (var playerController in playerControllers.Values)
+            {
+                playerController.isGameRunning = value == GameState.RUNNING;
+            }
+
+            if (value == GameState.INIT)
+            {
+                DespawnPlayers();
+            }
         }
     }
 
@@ -89,6 +100,25 @@ public class GameStateManager : MonoBehaviour
         }
     }
 
+    public void DespawnPlayers()
+    {
+        foreach (var spawnedPlayer in spawnedPlayers)
+        {
+            if (spawnedPlayer != null) {
+                Destroy(spawnedPlayer);
+            }
+        }
+        foreach (var playerInputController in playerInputControllers.Values)
+        {
+            if (playerInputController != null) {
+                Destroy(playerInputController.gameObject);
+            }
+        }
+        playerControllers.Clear();
+        playerInputControllers.Clear();
+        spawnedPlayers.Clear();
+    }
+
     public void SpawnPlayers()
     {
         for (int i = 0; i < 4; i++)
@@ -101,14 +131,15 @@ public class GameStateManager : MonoBehaviour
             }
 
             var playerGO = Instantiate(playerPrefab, spawnPoint.position, spawnPoint.rotation);
-                var playerController = playerGO.GetComponentInChildren<PlayerController>();
-                var visuals = playerGO.GetComponentInChildren<PlayerVisualController>();
-                visuals.SetVisuals(i);
-                playerController.PlayerIndex = i;
-                playerController.gameStateManager = this;
-                playerController.OnScoreChanged += OnPlayerScoreChanged;
-                var pic = playerInputControllers.ContainsKey(i) ? playerInputControllers[i] : null;
-                pic?.SetGameObject(playerGO);
+            var playerController = playerGO.GetComponentInChildren<PlayerController>();
+            var visuals = playerGO.GetComponentInChildren<PlayerVisualController>();
+            visuals.SetVisuals(i);
+            playerController.PlayerIndex = i;
+            playerController.OnScoreChanged += OnPlayerScoreChanged;
+            var pic = playerInputControllers.ContainsKey(i) ? playerInputControllers[i] : null;
+            pic?.SetGameObject(playerGO);
+            playerControllers.Add(i, playerController);
+            spawnedPlayers.Add(playerGO);
         }
     }
 
@@ -137,6 +168,7 @@ public class GameStateManager : MonoBehaviour
             State = GameState.INIT;
         }
         playerInputControllers.Remove(obj.playerIndex);
+        playerControllers.Remove(obj.playerIndex);
     }
 
     private void OnPlayerReadyStateChange(bool isPlayerReady)

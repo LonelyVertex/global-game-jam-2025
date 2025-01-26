@@ -57,7 +57,7 @@ public class PlayerInputController : MonoBehaviour
     {
         switch (gameState) {
             case GameStateManager.GameState.INIT:
-                Destroy(this.gameObject);
+                IsPlayerReady = false;
                 break;
             case GameStateManager.GameState.LOBBY:
                 IsPlayerReady = false;

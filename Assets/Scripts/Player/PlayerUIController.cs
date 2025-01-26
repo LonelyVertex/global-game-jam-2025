@@ -50,6 +50,11 @@ public class PlayerUIController : MonoBehaviour
         {
             SetFinishedGameUI();
         }
+
+        if (obj == GameStateManager.GameState.INIT)
+        {
+            SetInitUI();
+        }
     }
 
     private void OnPlayerLeft(PlayerInput obj)

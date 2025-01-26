@@ -82,7 +82,7 @@ public class PlayerController : MonoBehaviour
     float fireCooldown = 1f;
     float lastFireTime = -20f;
     public int PlayerIndex = 0;
-    public GameStateManager gameStateManager;
+    public bool isGameRunning = true;
 
     void OnDrawGizmos()
     {
@@ -98,7 +98,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (gameStateManager.State != GameStateManager.GameState.RUNNING)
+        if (!isGameRunning)
         {
             return;
         }
@@ -199,7 +199,7 @@ public class PlayerController : MonoBehaviour
 
     public void Fire()
     {
-        if (gameStateManager.State != GameStateManager.GameState.RUNNING)
+        if (!isGameRunning)
         {
             return;
         }
@@ -354,7 +354,7 @@ public class PlayerController : MonoBehaviour
 
     public void SetUnderwater(bool underwater)
     {
-        if (gameStateManager.State != GameStateManager.GameState.RUNNING)
+        if (!isGameRunning)
         {
             return;
         }
