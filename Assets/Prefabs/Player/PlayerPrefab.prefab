@@ -455,6 +455,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movement: {fileID: 6618951738989492608}
+  pistol: {fileID: 0}
+  shotgun: {fileID: 0}
+  bazooka: {fileID: 0}
+  nextWeapon: {fileID: 0}
+  dive: {fileID: 0}
+  death: {fileID: 0}
+  rise: {fileID: 0}
+  collectiblePickup: {fileID: 0}
+  obstacleHit: {fileID: 0}
 --- !u!82 &6618951738989492608
 AudioSource:
   m_ObjectHideFlags: 0
@@ -639,11 +648,15 @@ MonoBehaviour:
   pistolWeaponPrefab: {fileID: 5054334369350243583}
   rocketLauncherWeaponPrefab: {fileID: 837815433809354495}
   shotgunWeaponPrefab: {fileID: 6513732437814302681}
+  playerTrailParentTransform: {fileID: 1790919156255907590}
+  playerTrailTransform: {fileID: 1402815387379117442}
+  particleSystem: {fileID: 8686046583572973598}
   currentWeapon: 3
   underwaterDetectRadius: 0.42
   waterLayer:
     serializedVersion: 2
     m_Bits: 1024
+  killed: 0
 --- !u!114 &2139583067153348419
 MonoBehaviour:
   m_ObjectHideFlags: 0

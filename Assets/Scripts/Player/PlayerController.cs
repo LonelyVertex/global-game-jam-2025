@@ -39,6 +39,11 @@ public class PlayerController : MonoBehaviour
     public GameObject rocketLauncherWeaponPrefab;
     public GameObject shotgunWeaponPrefab;
 
+    [Space]
+    public Transform playerTrailParentTransform;
+    public Transform playerTrailTransform;
+    public ParticleSystem particleSystem;
+
     public WeaponType currentWeapon = WeaponType.Pistol;
 
     public float underwaterDetectRadius;
@@ -379,6 +384,9 @@ public class PlayerController : MonoBehaviour
 
     public void Kill()
     {
+        playerTrailTransform.SetParent(null, worldPositionStays: true);
+        particleSystem.Stop();
+
         Debug.Log("Player Killed");
         gameObject.GetComponentInChildren<PlayerBody>(true).gameObject.SetActive(false);
         killed = true;
@@ -389,7 +397,6 @@ public class PlayerController : MonoBehaviour
 
     public void Respawn()
     {
-
         var spawnLocation = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Count)];
         var colliders = Physics2D.OverlapCircleAll(spawnLocation.transform.position, underwaterDetectRadius, waterLayer);
         if (colliders.All(col => col.GetComponent<CollectibleWeapon>()))
@@ -399,6 +406,10 @@ public class PlayerController : MonoBehaviour
             InitPlayerState();
             rb.position = spawnLocation.transform.position;
             gameObject.GetComponentInChildren<PlayerBody>(true).gameObject.SetActive(true);
+
+            playerTrailTransform.SetParent(playerTrailParentTransform, worldPositionStays: false);
+            playerTrailTransform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
+            particleSystem.Play();
         }
     }
 

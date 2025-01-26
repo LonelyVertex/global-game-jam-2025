@@ -20,7 +20,6 @@ public class PlayerVisualController : MonoBehaviour
 
     public void SetType(bool underwater)
     {
-
         if (underwater)
         {
             particleSystem.Stop();

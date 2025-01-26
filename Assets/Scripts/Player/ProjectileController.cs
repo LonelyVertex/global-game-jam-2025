@@ -31,7 +31,7 @@ public class ProjectileController : MonoBehaviour
         }
 
         trail.transform.SetParent(null);
-        Destroy(trail, particleSystem.main.duration);
+        Destroy(trail, particleSystem.main.startLifetime.constant);
 
         Destroy(gameObject);
     }
