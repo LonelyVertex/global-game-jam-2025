@@ -34,8 +34,14 @@ public class RocketExplosionController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            playerController.IncremeantScore();
-            other.gameObject.GetComponentInParent<PlayerController>().Kill();
+            //Check for self kill
+            if (other.gameObject.GetComponentInParent<PlayerController>().gameObject == playerController.gameObject)  {
+                playerController.ReduceScore();
+                other.gameObject.GetComponentInParent<PlayerController>().Kill();
+            } else {
+                playerController.IncrementScore();
+                other.gameObject.GetComponentInParent<PlayerController>().Kill();
+            }
         }
         
         var rb = other.gameObject.GetComponentInParent<Rigidbody2D>();

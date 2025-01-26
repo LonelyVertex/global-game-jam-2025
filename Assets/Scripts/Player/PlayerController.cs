@@ -91,6 +91,14 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         ApplyInputVector();
+        if (killed)
+        {
+            spawnTime += Time.fixedDeltaTime;
+            if (spawnTime >= spawnDownTime)
+            {
+                Respawn();
+            }
+        }
     }
 
     void Update()
@@ -113,14 +121,6 @@ public class PlayerController : MonoBehaviour
                 {
                     divingEnabled = true;
                 }
-            }
-        }
-        if (killed)
-        {
-            spawnTime += Time.deltaTime;
-            if (spawnTime >= spawnDownTime)
-            {
-                Respawn();
             }
         }
     }
@@ -196,7 +196,7 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-        
+
         if (lastFireTime + fireCooldown > Time.time)
         {
             return;
@@ -236,9 +236,9 @@ public class PlayerController : MonoBehaviour
                     break;
 
             }
-            
+
             lastFireTime = Time.time;
-            
+
             if (weaponAmmo[currentWeapon] == 0)
             {
                 SetNextWeapon();
@@ -311,9 +311,16 @@ public class PlayerController : MonoBehaviour
         rb.AddTorque(-rotationSpeed, ForceMode2D.Force);
     }
 
-    public void IncremeantScore()
+    public void IncrementScore()
     {
         score++;
+        Debug.Log("Score: " + score);
+        OnScoreChanged?.Invoke();
+    }
+
+    public void ReduceScore()
+    {
+        score = Math.Max(0, score - 1);
         Debug.Log("Score: " + score);
         OnScoreChanged?.Invoke();
     }
@@ -387,7 +394,8 @@ public class PlayerController : MonoBehaviour
 
         var spawnLocation = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Count)];
         var colliders = Physics2D.OverlapCircleAll(spawnLocation.transform.position, underwaterDetectRadius, waterLayer);
-        if (colliders.All(col => col.GetComponent<CollectibleWeapon>())) {
+        if (colliders.All(col => col.GetComponent<CollectibleWeapon>()))
+        {
             Debug.Log("Player Respawned");
             killed = false;
             rb.position = spawnLocation.transform.position;
