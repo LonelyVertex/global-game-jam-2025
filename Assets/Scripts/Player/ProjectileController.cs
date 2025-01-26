@@ -20,13 +20,20 @@ public class ProjectileController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            //Check for self kill
-            if (collision.gameObject.GetComponentInParent<PlayerController>().gameObject == playerController.gameObject)  {
-                playerController.ReduceScore();
-                collision.gameObject.GetComponent<PlayerController>().Kill();
-            } else {
-                playerController.IncrementScore();
-                collision.gameObject.GetComponent<PlayerController>().Kill();
+            var collisionPlayerController = collision.gameObject.GetComponent<PlayerController>();
+            if (!collisionPlayerController.killed)
+            {
+                //Check for self kill
+                if (collisionPlayerController.gameObject == playerController.gameObject)
+                {
+                    playerController.ReduceScore();
+                    collisionPlayerController.Kill();
+                }
+                else
+                {
+                    playerController.IncrementScore();
+                    collisionPlayerController.Kill();
+                }
             }
         }
 
