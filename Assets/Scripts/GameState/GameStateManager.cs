@@ -4,7 +4,9 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms.Impl;
+using UnityEngine.UI;
 
 public class GameStateManager : MonoBehaviour
 {
@@ -24,7 +26,11 @@ public class GameStateManager : MonoBehaviour
     public GameObject LocalPlayerPrefab;
     [SerializeField]
     public bool areAIBotsEnabled = true;
-
+    [Space]
+    [SerializeField] List<Sprite> playerHeads = new List<Sprite>();
+    [SerializeField] GameObject winnerUi;
+    [SerializeField] Image winnerHeadImage;
+    
     private FadeController _fadeController;
 
     public enum GameState
@@ -114,7 +120,10 @@ public class GameStateManager : MonoBehaviour
 
         if (score >= ScoreToFinish) {
             FinishGame();
-            PlayerUIControllers[player.PlayerIndex].SetWinner();
+            // PlayerUIControllers[player.PlayerIndex].SetWinner();
+            
+            winnerHeadImage.sprite = playerHeads[player.PlayerIndex];
+            winnerUi.SetActive(true);
         }
     }
 
@@ -189,5 +198,15 @@ public class GameStateManager : MonoBehaviour
     public Transform GetSpawnPoint(int playerIndex)
     {
         return Spawners.Find(spawner => spawner.PlayerIndex == playerIndex).transform;
+    }
+
+    public void LoadMainScene()
+    {
+        SceneManager.LoadScene("Main");
+    }
+
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 }

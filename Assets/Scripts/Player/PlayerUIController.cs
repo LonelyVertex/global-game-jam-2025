@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerUIController : MonoBehaviour
 {
@@ -126,8 +127,8 @@ public class PlayerUIController : MonoBehaviour
     {
         HideAllUI();
         gamePlayUI.SetActive(true);
-        finishedGameUI.gameObject.SetActive(true);
-        finishedGameUI.EnableUI(isWinner);
+        // finishedGameUI.gameObject.SetActive(true);
+        // finishedGameUI.EnableUI(isWinner);
     }
 
     public void Reset()
