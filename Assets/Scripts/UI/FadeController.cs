@@ -22,8 +22,6 @@ public class FadeController : MonoBehaviour
             Destroy(this.gameObject);
             return;
         }
-
-        DontDestroyOnLoad(this);
     }
 
     public void FadeOut()
