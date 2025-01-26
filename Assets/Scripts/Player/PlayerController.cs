@@ -90,6 +90,8 @@ public class PlayerController : MonoBehaviour
     {
         visualController.SetType(underwater);
         spawnPoints.AddRange(GameObject.FindGameObjectsWithTag("SpawnPoint"));
+
+        InitPlayerState();
     }
 
     void FixedUpdate()
@@ -168,8 +170,6 @@ public class PlayerController : MonoBehaviour
     public void SetWeapon(WeaponType weapon)
     {
         currentWeapon = weapon;
-
-        audioController.SetNextWeapon();
     }
 
     public void SetNextWeapon()
@@ -295,7 +295,7 @@ public class PlayerController : MonoBehaviour
             anyInput = true;
         }
 
-        if (anyInput && Random.Range(0.0f, 1000.0f) < 10.0f)
+        if (anyInput && Random.Range(0.0f, 100.0f) < 10.0f)
         {
             audioController.Movement();
         }
@@ -445,5 +445,10 @@ public class PlayerController : MonoBehaviour
         SetWeapon(WeaponType.Hands);
         rb.linearVelocity = Vector2.zero;
         rb.angularVelocity = 0.0f;
+
+        if (!killed)
+        {
+            audioController.DuckSpawned();
+        }
     }
 }

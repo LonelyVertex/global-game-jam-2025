@@ -6,7 +6,6 @@ public class PlayerAudioController : MonoBehaviour
     public AudioSource pistol;
     public AudioSource shotgun;
     public AudioSource bazooka;
-    public AudioSource nextWeapon;
     public AudioSource dive;
     public AudioSource death;
     public AudioSource rise;
@@ -26,11 +25,6 @@ public class PlayerAudioController : MonoBehaviour
     public void ShootBazooka()
     {
         bazooka.Play();
-    }
-
-    public void SetNextWeapon()
-    {
-        nextWeapon.Play();
     }
 
     public void Movement()
