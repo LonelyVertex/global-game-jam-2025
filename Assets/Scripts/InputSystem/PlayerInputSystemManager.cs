@@ -37,7 +37,6 @@ public class PlayerInputSystemManager : MonoBehaviour
     {
         playerInputManager.onPlayerJoined += OnPlayerJoined;
         playerInputManager.onPlayerLeft += OnPlayerLeft;
-        gameStateManager.OnGameStateChanged += OnGameStateChanged;
         playerInputManager.playerPrefab = playerPrefab;
         Debug.Log($"Joining enabled: {playerInputManager.joiningEnabled}");
     }
@@ -72,12 +71,6 @@ public class PlayerInputSystemManager : MonoBehaviour
     {
         playerInputManager.onPlayerJoined -= OnPlayerJoined;
         playerInputManager.onPlayerLeft -= OnPlayerLeft;
-        gameStateManager.OnGameStateChanged -= OnGameStateChanged;
-    }
-
-    private void OnGameStateChanged(GameStateManager.GameState obj)
-    {
-        isJoiningEnabled = obj == GameStateManager.GameState.INIT || obj == GameStateManager.GameState.LOBBY;
     }
 
     private void OnPlayerJoined(PlayerInput playerInput)
@@ -89,6 +82,7 @@ public class PlayerInputSystemManager : MonoBehaviour
 
     void Update()
     {
+        isJoiningEnabled = gameStateManager.State == GameStateManager.GameState.INIT || gameStateManager.State == GameStateManager.GameState.LOBBY;
         var gamepads = Gamepad.all;
         if (gameStateManager.State == GameStateManager.GameState.FINISHED && gameStateManager.restartOnKeyboardEnabled)
         {
