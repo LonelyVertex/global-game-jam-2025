@@ -326,6 +326,10 @@ public class PlayerController : MonoBehaviour
 
     public void SetUnderwater(bool underwater)
     {
+        if (killed)
+        {
+            return;
+        }
         if (underwater != this.underwater)
         {
 
@@ -381,6 +385,7 @@ public class PlayerController : MonoBehaviour
 
     public void Respawn()
     {
+        Debug.Log("Player Respawned");
         killed = false;
         var spawnLocation = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Count)];
         gameObject.GetComponentInChildren<PlayerBody>(true).gameObject.SetActive(true);
