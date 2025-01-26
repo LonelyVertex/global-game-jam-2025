@@ -356,11 +356,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1664441793587690746, guid: d994ec1ab490d488cbca83e6ec8215a5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.31
+      value: -6.44
       objectReference: {fileID: 0}
     - target: {fileID: 1664441793587690746, guid: d994ec1ab490d488cbca83e6ec8215a5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.32
+      value: 0.37
       objectReference: {fileID: 0}
     - target: {fileID: 1664441793587690746, guid: d994ec1ab490d488cbca83e6ec8215a5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -368,19 +368,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1664441793587690746, guid: d994ec1ab490d488cbca83e6ec8215a5, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.72675455
+      value: 0.99849683
       objectReference: {fileID: 0}
     - target: {fileID: 1664441793587690746, guid: d994ec1ab490d488cbca83e6ec8215a5, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1664441793587690746, guid: d994ec1ab490d488cbca83e6ec8215a5, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1664441793587690746, guid: d994ec1ab490d488cbca83e6ec8215a5, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.6868973
+      value: -0.054809544
       objectReference: {fileID: 0}
     - target: {fileID: 1664441793587690746, guid: d994ec1ab490d488cbca83e6ec8215a5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -392,7 +392,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1664441793587690746, guid: d994ec1ab490d488cbca83e6ec8215a5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 86.77
+      value: -6.284
       objectReference: {fileID: 0}
     - target: {fileID: 3641908137691831545, guid: d994ec1ab490d488cbca83e6ec8215a5, type: 3}
       propertyPath: m_Sprite
@@ -404,7 +404,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4596956068457529361, guid: d994ec1ab490d488cbca83e6ec8215a5, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7902411494907306880, guid: d994ec1ab490d488cbca83e6ec8215a5, type: 3}
       propertyPath: m_Sprite
@@ -826,7 +826,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1984906758
 MonoBehaviour:
   m_ObjectHideFlags: 0
