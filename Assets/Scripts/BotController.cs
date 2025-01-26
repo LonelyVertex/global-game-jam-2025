@@ -4,26 +4,26 @@ using UnityEngine;
 
 public class BotController : MonoBehaviour
 {
+    const bool DebugEnabled = false;
     readonly Color DebugColor = Color.cyan;
 
     public PlayerController pc;
     public LayerMask collisionLayer;
-    [Space]
-    public float checkDistance;
+    [Space] public float checkDistance;
 
     bool _rotationChosen;
     Vector4 _rotation;
-    
+
     Transform _closestWeaponPosition;
 
     void Update()
     {
         if (pc.killed) return;
-        
+
         if (HasWeapon())
         {
             Log("Can shoot, looking for players");
-            
+
             UpdateShooting();
         }
         else
@@ -35,37 +35,38 @@ public class BotController : MonoBehaviour
     void UpdateWeaponSearch()
     {
         Log("Update Weapon Search");
-        
+
         var collectibles = FindObjectsByType<CollectibleWeapon>(FindObjectsSortMode.None);
-        
+
         if (collectibles.Length == 0)
         {
             Log("No collectibles found, hide and fallback to driving");
-            
+
             pc.SetUnderwater(true);
-            
+
             UpdateDriving();
             return;
         }
-        
+
         pc.SetUnderwater(false);
-        
-        var closestWeapon = collectibles.OrderBy(collectible => Vector2.Distance(pc.transform.position, collectible.transform.position)).First();
+
+        var closestWeapon = collectibles
+            .OrderBy(collectible => Vector2.Distance(pc.transform.position, collectible.transform.position)).First();
         Debug.DrawLine(pc.transform.position, closestWeapon.transform.position, DebugColor);
-        
+
         var closestWeaponDistance = Vector2.Distance(pc.transform.position, closestWeapon.transform.position);
         var forwardDistance = CollisionDistance(pc.transform.up);
-        
+
         if (forwardDistance < closestWeaponDistance)
         {
             Debug.Log("Can't reach weapon, fallback to driving");
-            
+
             UpdateDriving();
             return;
         }
-        
+
         var direction = (closestWeapon.transform.position - pc.transform.position).normalized;
-        
+
         // Cross product to find perpendicular vector
         var cross = Vector3.Cross(pc.transform.up, direction);
 
@@ -73,7 +74,7 @@ public class BotController : MonoBehaviour
         var dot = Vector3.Dot(cross, -Vector3.forward);
 
         var inputVector = new Vector4(1, 0, 0, 0);
-        
+
         if (dot > 0)
         {
             Debug.Log("Turning right");
@@ -88,16 +89,17 @@ public class BotController : MonoBehaviour
         {
             Debug.Log("Moving towards weapon");
         }
-        
-        
+
+
         pc.SetInputVector(inputVector);
-        
+
         _rotationChosen = false;
     }
 
     void UpdateShooting()
     {
-        var closestPlayer = FindOtherPlayers().OrderBy(other => Vector2.Distance(pc.transform.position, other.transform.position)).FirstOrDefault();
+        var closestPlayer = FindOtherPlayers()
+            .OrderBy(other => Vector2.Distance(pc.transform.position, other.transform.position)).FirstOrDefault();
 
         if (!closestPlayer)
         {
@@ -105,22 +107,22 @@ public class BotController : MonoBehaviour
             UpdateWeaponSearch();
             return;
         }
-        
+
         Debug.DrawLine(pc.transform.position, closestPlayer.transform.position, DebugColor);
-        
+
         var closestWeaponDistance = Vector2.Distance(pc.transform.position, closestPlayer.transform.position);
         var forwardDistance = CollisionDistance(pc.transform.up);
-        
+
         if (forwardDistance < closestWeaponDistance)
         {
             Debug.Log("Can't reach other player, fallback to driving");
-            
+
             UpdateDriving();
             return;
         }
-        
+
         var direction = (closestPlayer.transform.position - pc.transform.position).normalized;
-        
+
         // Cross product to find perpendicular vector
         var cross = Vector3.Cross(pc.transform.up, direction);
 
@@ -128,7 +130,7 @@ public class BotController : MonoBehaviour
         var dot = Vector3.Dot(cross, -Vector3.forward);
 
         var inputVector = new Vector4(1, 0, 0, 0);
-        
+
         if (dot > 0)
         {
             Debug.Log("Turning right");
@@ -143,11 +145,11 @@ public class BotController : MonoBehaviour
         {
             Debug.Log("Moving towards player");
         }
-        
+
         TryShoot();
-        
+
         pc.SetInputVector(inputVector);
-        
+
         _rotationChosen = false;
     }
 
@@ -175,7 +177,7 @@ public class BotController : MonoBehaviour
 
                 _rotationChosen = true;
             }
-            
+
             inputVector += _rotation;
         }
         else
@@ -189,7 +191,7 @@ public class BotController : MonoBehaviour
     void TryShoot()
     {
         if (!ShouldShoot()) return;
-        
+
         pc.Fire();
     }
 
@@ -233,7 +235,7 @@ public class BotController : MonoBehaviour
         if (playersInSight && pc.currentWeapon == PlayerController.WeaponType.RocketLauncher)
         {
             var collisionDistance = CollisionDistance(pc.transform.up);
-            
+
             return collisionDistance > 4;
         }
 
@@ -243,11 +245,11 @@ public class BotController : MonoBehaviour
     float FindAngle(Transform otherPlayer)
     {
         var direction = otherPlayer.position - pc.transform.position;
-        
+
         var angle = Vector2.SignedAngle(pc.transform.up, direction);
-        
+
         Debug.Log($"Angle: {otherPlayer.name} - {angle}");
-        
+
         return Vector2.SignedAngle(pc.transform.up, direction);
     }
 
@@ -256,9 +258,12 @@ public class BotController : MonoBehaviour
         return FindObjectsByType<PlayerController>(FindObjectsSortMode.None)
             .Where(otherPc => pc != otherPc && !otherPc.killed && !otherPc.IsUnderwater());
     }
-    
+
     void Log(string msg)
     {
-        Debug.Log($"[BOT][{gameObject.name}] {msg}");
+        if (DebugEnabled)
+        {
+            Debug.Log($"[BOT][{gameObject.name}] {msg}");
+        }
     }
 }
