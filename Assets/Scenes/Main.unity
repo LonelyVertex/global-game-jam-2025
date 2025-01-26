@@ -473,6 +473,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4917484373400771, guid: 26e9720c7333d456d87af4cc24ed0d2c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 60397317520745911, guid: 26e9720c7333d456d87af4cc24ed0d2c, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1540515676, guid: a1af65c5fdff245ab9073ee2dab4db3b, type: 3}
     - target: {fileID: 394019059259799532, guid: 26e9720c7333d456d87af4cc24ed0d2c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.52
@@ -480,6 +488,10 @@ PrefabInstance:
     - target: {fileID: 394019059259799532, guid: 26e9720c7333d456d87af4cc24ed0d2c, type: 3}
       propertyPath: m_LocalPosition.y
       value: 2.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 732243271053638274, guid: 26e9720c7333d456d87af4cc24ed0d2c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1826311481152704456, guid: 26e9720c7333d456d87af4cc24ed0d2c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -529,6 +541,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -2.4
       objectReference: {fileID: 0}
+    - target: {fileID: 2176597365774896450, guid: 26e9720c7333d456d87af4cc24ed0d2c, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1039647531, guid: a1af65c5fdff245ab9073ee2dab4db3b, type: 3}
     - target: {fileID: 2605537731513577743, guid: 26e9720c7333d456d87af4cc24ed0d2c, type: 3}
       propertyPath: m_LocalScale.x
       value: 14.5
@@ -553,9 +569,25 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -2.42
       objectReference: {fileID: 0}
+    - target: {fileID: 7120042096012991655, guid: 26e9720c7333d456d87af4cc24ed0d2c, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1631704899, guid: a1af65c5fdff245ab9073ee2dab4db3b, type: 3}
+    - target: {fileID: 7517544264860161380, guid: 26e9720c7333d456d87af4cc24ed0d2c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7717835017332146795, guid: 26e9720c7333d456d87af4cc24ed0d2c, type: 3}
       propertyPath: m_Name
       value: GameContext
+      objectReference: {fileID: 0}
+    - target: {fileID: 8037265479556411399, guid: 26e9720c7333d456d87af4cc24ed0d2c, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 544429884, guid: a1af65c5fdff245ab9073ee2dab4db3b, type: 3}
+    - target: {fileID: 8174810046563291579, guid: 26e9720c7333d456d87af4cc24ed0d2c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
