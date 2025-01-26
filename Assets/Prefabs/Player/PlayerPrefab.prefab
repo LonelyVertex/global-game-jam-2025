@@ -1713,13 +1713,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   normalSprites:
   - {fileID: -382762647, guid: 3fc907d37c25a40c5a5a722d26030fbf, type: 3}
-  - {fileID: 1478110186, guid: 3fc907d37c25a40c5a5a722d26030fbf, type: 3}
   - {fileID: 1441252405, guid: 3fc907d37c25a40c5a5a722d26030fbf, type: 3}
+  - {fileID: 1478110186, guid: 3fc907d37c25a40c5a5a722d26030fbf, type: 3}
   - {fileID: 294546476, guid: 3fc907d37c25a40c5a5a722d26030fbf, type: 3}
   underwaterSprites:
   - {fileID: -3033621200747914218, guid: 11a67a98ea289451780252938ae8ce4c, type: 3}
-  - {fileID: 1377550770042829737, guid: 11a67a98ea289451780252938ae8ce4c, type: 3}
   - {fileID: -2656535799722645896, guid: 11a67a98ea289451780252938ae8ce4c, type: 3}
+  - {fileID: 1377550770042829737, guid: 11a67a98ea289451780252938ae8ce4c, type: 3}
   - {fileID: -2952441845584215906, guid: 11a67a98ea289451780252938ae8ce4c, type: 3}
   normalSpriteRenderer: {fileID: 3641908137691831545}
   underwaterSpriteRenderer: {fileID: 7902411494907306880}
