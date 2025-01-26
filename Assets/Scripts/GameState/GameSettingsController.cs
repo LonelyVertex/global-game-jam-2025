@@ -7,7 +7,7 @@ public class GameSettingsController : MonoBehaviour
     
     void Start()
     {
-        aiBotsEnabledToggle.isOn = GetAIBotsEnabled();
+        aiBotsEnabledToggle.SetIsOnWithoutNotify(GetAIBotsEnabled());
         aiBotsEnabledToggle.onValueChanged.AddListener(OnAIBotsEnabledToggleChanged);
     }
     void OnDestroy()
