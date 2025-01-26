@@ -424,6 +424,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cameras
       objectReference: {fileID: 0}
+    - target: {fileID: 3101984821354111741, guid: b652da55147fc7e418898959f80a913d, type: 3}
+      propertyPath: orthographic size
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4788162990724526966, guid: b652da55147fc7e418898959f80a913d, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
@@ -451,6 +455,10 @@ PrefabInstance:
     - target: {fileID: 4788162990724526966, guid: b652da55147fc7e418898959f80a913d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7900875973703163384, guid: b652da55147fc7e418898959f80a913d, type: 3}
+      propertyPath: orthographic size
+      value: 5.6
       objectReference: {fileID: 0}
     - target: {fileID: 7900875973703163384, guid: b652da55147fc7e418898959f80a913d, type: 3}
       propertyPath: m_BackGroundColor.b
