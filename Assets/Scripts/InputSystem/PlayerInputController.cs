@@ -95,6 +95,9 @@ public class PlayerInputController : MonoBehaviour
         {
             GameStateManager.FinishGame();
             GameStateManager.PlayerUIControllers[playerInput.playerIndex].SetWinner();
+            //Destroy all projectiles
+            var projectiles = FindObjectsOfType<ProjectileController>();
+            Array.ForEach(projectiles, p => p.DestroyProjectile());
         }
     }
 
