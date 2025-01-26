@@ -90,7 +90,7 @@ public class PlayerInputSystemManager : MonoBehaviour
     void Update()
     {
         var gamepads = Gamepad.all;
-        if (gameStateManager.State == GameStateManager.GameState.FINISHED)
+        if (gameStateManager.State == GameStateManager.GameState.FINISHED && gameStateManager.restartOnKeyboardEnabled)
         {
             var keyPressedToRestart = Keyboard.current[Key.LeftCtrl].wasPressedThisFrame ||
                 Keyboard.current[Key.RightCtrl].wasPressedThisFrame ||

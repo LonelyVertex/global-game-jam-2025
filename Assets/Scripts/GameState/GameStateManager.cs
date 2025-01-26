@@ -27,6 +27,8 @@ public class GameStateManager : MonoBehaviour
     public GameObject LocalPlayerPrefab;
     [SerializeField]
     public bool areAIBotsEnabled = true;
+    [SerializeField]
+    public bool restartOnKeyboardEnabled = false;
     [Space]
     [SerializeField] List<Sprite> playerHeads = new List<Sprite>();
     [SerializeField] GameObject winnerUi;
