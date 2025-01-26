@@ -22,7 +22,8 @@ public class GameStateManager : MonoBehaviour
     public GameObject AIBotPrefab;
     [SerializeField]
     public GameObject LocalPlayerPrefab;
-    
+    [SerializeField]
+    public bool areAIBotsEnabled = true;
 
     private FadeController _fadeController;
 
@@ -53,6 +54,7 @@ public class GameStateManager : MonoBehaviour
 
     public void Start()
     {
+        areAIBotsEnabled = GameSettingsController.GetAIBotsEnabled();
         _fadeController = FindFirstObjectByType<FadeController>();
         if (_fadeController != null)
         {
@@ -86,16 +88,21 @@ public class GameStateManager : MonoBehaviour
         for (int i = 0; i < 4; i++)
         {
             var spawnPoint = GetSpawnPoint(i);
-            var playerPrefab = playerInputControllers.ContainsKey(i) ? LocalPlayerPrefab : AIBotPrefab; 
+            var playerPrefab = playerInputControllers.ContainsKey(i) ? LocalPlayerPrefab : AIBotPrefab;
+            if (!playerInputControllers.ContainsKey(i) && !areAIBotsEnabled)
+            {
+                continue;
+            }
+
             var playerGO = Instantiate(playerPrefab, spawnPoint.position, spawnPoint.rotation);
-            var playerController = playerGO.GetComponentInChildren<PlayerController>();
-            var visuals = playerGO.GetComponentInChildren<PlayerVisualController>();
-            visuals.SetVisuals(i);
-            playerController.PlayerIndex = i;
-            playerController.gameStateManager = this;
-            playerController.OnScoreChanged += OnPlayerScoreChanged;
-            var pic = playerInputControllers.ContainsKey(i) ? playerInputControllers[i] : null;
-            pic?.SetGameObject(playerGO);
+                var playerController = playerGO.GetComponentInChildren<PlayerController>();
+                var visuals = playerGO.GetComponentInChildren<PlayerVisualController>();
+                visuals.SetVisuals(i);
+                playerController.PlayerIndex = i;
+                playerController.gameStateManager = this;
+                playerController.OnScoreChanged += OnPlayerScoreChanged;
+                var pic = playerInputControllers.ContainsKey(i) ? playerInputControllers[i] : null;
+                pic?.SetGameObject(playerGO);
         }
     }
 
