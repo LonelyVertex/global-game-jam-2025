@@ -203,8 +203,8 @@ public class GameStateManager : MonoBehaviour
         {
             FinishGame();
         }
-    }
 #endif
+    }
 
     public void RestartGame()
     {
