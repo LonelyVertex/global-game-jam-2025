@@ -97,7 +97,7 @@ public class BotController : MonoBehaviour
 
     void UpdateShooting()
     {
-        var closestPlayer = FindOtherPlayers().OrderBy(other => Vector2.Distance(pc.transform.position, other.transform.position)).First();
+        var closestPlayer = FindOtherPlayers().OrderBy(other => Vector2.Distance(pc.transform.position, other.transform.position)).FirstOrDefault();
 
         if (!closestPlayer)
         {
