@@ -253,7 +253,7 @@ public class BotController : MonoBehaviour
 
     IEnumerable<PlayerController> FindOtherPlayers()
     {
-        return FindObjectsByType<PlayerController>(FindObjectsSortMode.None).Where(otherPc => pc != otherPc && !pc.killed);
+        return FindObjectsByType<PlayerController>(FindObjectsSortMode.None).Where(otherPc => pc != otherPc && !otherPc.killed);
     }
     
     void Log(string msg)
