@@ -120,8 +120,7 @@ public class PlayerController : MonoBehaviour
             spawnTime += Time.deltaTime;
             if (spawnTime >= spawnDownTime)
             {
-                killed = false;
-                gameObject.GetComponentInChildren<PlayerBody>(true).gameObject.SetActive(true);
+                Respawn();
             }
         }
     }
@@ -385,9 +384,14 @@ public class PlayerController : MonoBehaviour
 
     public void Respawn()
     {
-        Debug.Log("Player Respawned");
-        killed = false;
+
         var spawnLocation = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Count)];
-        gameObject.GetComponentInChildren<PlayerBody>(true).gameObject.SetActive(true);
+        var colliders = Physics2D.OverlapCircleAll(spawnLocation.transform.position, underwaterDetectRadius, waterLayer);
+        if (colliders.All(col => col.GetComponent<CollectibleWeapon>())) {
+            Debug.Log("Player Respawned");
+            killed = false;
+            rb.position = spawnLocation.transform.position;
+            gameObject.GetComponentInChildren<PlayerBody>(true).gameObject.SetActive(true);
+        }
     }
 }
