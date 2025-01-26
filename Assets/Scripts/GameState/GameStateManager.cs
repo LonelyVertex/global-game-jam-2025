@@ -33,7 +33,9 @@ public class GameStateManager : MonoBehaviour
     [SerializeField] List<Sprite> playerHeads = new List<Sprite>();
     [SerializeField] GameObject winnerUi;
     [SerializeField] Image winnerHeadImage;
-    
+
+    public AudioSource audioSource;
+
     private FadeController _fadeController;
 
     public enum GameState
@@ -93,6 +95,8 @@ public class GameStateManager : MonoBehaviour
 
     private void OnPlayerJoined(PlayerInput obj)
     {
+        audioSource.Play();
+
         var playerInputController = obj.GetComponent<PlayerInputController>();
         playerInputController.OnReadyStateChange += OnPlayerReadyStateChange;
         playerInputControllers.Add(obj.playerIndex, playerInputController);
@@ -175,6 +179,8 @@ public class GameStateManager : MonoBehaviour
 
     private void OnPlayerReadyStateChange(bool isPlayerReady)
     {
+        audioSource.Play();
+
         if (isPlayerReady)
         {
             if (playerInputControllers.All(pair => pair.Value.IsPlayerReady))
