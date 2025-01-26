@@ -348,9 +348,9 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
+
         if (underwater != this.underwater)
         {
-
             if (!underwater)
             {
                 if (CanRise())

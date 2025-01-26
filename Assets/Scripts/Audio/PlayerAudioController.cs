@@ -12,14 +12,27 @@ public class PlayerAudioController : MonoBehaviour
     public AudioSource rise;
     public AudioSource collectiblePickup;
     public AudioSource obstacleHit;
+    public AudioSource duckSpawned;
 
-    public void ShootPistol() {}
+    public void ShootPistol()
+    {
+        pistol.Play();
+    }
 
-    public void ShootShotgun() { }
+    public void ShootShotgun()
+    {
+        shotgun.Play();
+    }
 
-    public void ShootBazooka() {}
+    public void ShootBazooka()
+    {
+        bazooka.Play();
+    }
 
-    public void SetNextWeapon() { }
+    public void SetNextWeapon()
+    {
+        nextWeapon.Play();
+    }
 
     public void Movement()
     {
@@ -31,13 +44,38 @@ public class PlayerAudioController : MonoBehaviour
         movement.Play();
     }
 
-    public void Dive() { }
+    public void Dive()
+    {
+        dive.Play();
+    }
 
-    public void Death() { }
+    public void Death()
+    {
+        death.Play();
+    }
 
-    public void Rise() { }
+    public void Rise()
+    {
+        rise.Play();
+    }
 
-    public void CollectiblePickup() { }
+    public void CollectiblePickup()
+    {
+        collectiblePickup.Play();
+    }
 
-    public void ObstacleHit() { }
+    public void ObstacleHit()
+    {
+        if (obstacleHit.isPlaying)
+        {
+            return;
+        }
+        
+        obstacleHit.Play();
+    }
+
+    public void DuckSpawned()
+    {
+        duckSpawned.Play();
+    }
 }

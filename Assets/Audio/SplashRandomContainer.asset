@@ -1,0 +1,82 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1233149941 &-5982496953354517942
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Splash_03_{-5982496953354517942}
+  m_AudioClip: {fileID: 8300000, guid: e5be1048b3ed4d647b53686d8d9d5e64, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-5678027909160542732
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Splash_01_{-5678027909160542732}
+  m_AudioClip: {fileID: 8300000, guid: 36081b438b65c934a927b95db14391c1, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-2110814930350148016
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Splash_02_{-2110814930350148016}
+  m_AudioClip: {fileID: 8300000, guid: d308826ea137feb45952c0238e7a47c2, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &3898460354004447063
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Splash_05_{3898460354004447063}
+  m_AudioClip: {fileID: 8300000, guid: 336134cb730957247987d899069ab15b, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &5965019874662003194
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Splash_04_{5965019874662003194}
+  m_AudioClip: {fileID: 8300000, guid: 2fb824332ce2a894a98dfb4910633bb8, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1307931743 &6418180475301049370
+AudioRandomContainer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SplashRandomContainer
+  m_Volume: -8
+  m_Pitch: 0
+  m_AutomaticTriggerTime: 0
+  m_LoopCount: 1
+  m_VolumeRandomizationRange: {x: 0, y: 0}
+  m_PitchRandomizationRange: {x: 0, y: 0}
+  m_AutomaticTriggerTimeRandomizationRange: {x: 0, y: 0}
+  m_LoopCountRandomizationRange: {x: 0, y: 0}
+  m_Elements:
+  - {fileID: -5678027909160542732}
+  - {fileID: -2110814930350148016}
+  - {fileID: -5982496953354517942}
+  - {fileID: 5965019874662003194}
+  - {fileID: 3898460354004447063}
+  m_AvoidRepeatingLast: 1
+  m_PlaybackMode: 2
+  m_TriggerMode: 0
+  m_AutomaticTriggerMode: 1
+  m_LoopMode: 2
+  m_VolumeRandomizationEnabled: 0
+  m_PitchRandomizationEnabled: 0
+  m_AutomaticTriggerTimeRandomizationEnabled: 0
+  m_LoopCountRandomizationEnabled: 0
