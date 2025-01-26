@@ -2,10 +2,15 @@ using UnityEngine;
 
 public class PlayOnHit : MonoBehaviour
 {
-    public PlayerAudioController audioController;
+    public AudioSource audioSource;
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        audioController.ObstacleHit();
+        if (audioSource.isPlaying)
+        {
+            return;
+        }
+        
+        audioSource.Play();
     }
 }

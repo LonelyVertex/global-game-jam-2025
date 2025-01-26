@@ -11,7 +11,6 @@ public class PlayerAudioController : MonoBehaviour
     public AudioSource death;
     public AudioSource rise;
     public AudioSource collectiblePickup;
-    public AudioSource obstacleHit;
     public AudioSource duckSpawned;
 
     public void ShootPistol()
@@ -62,16 +61,6 @@ public class PlayerAudioController : MonoBehaviour
     public void CollectiblePickup()
     {
         collectiblePickup.Play();
-    }
-
-    public void ObstacleHit()
-    {
-        if (obstacleHit.isPlaying)
-        {
-            return;
-        }
-        
-        obstacleHit.Play();
     }
 
     public void DuckSpawned()
