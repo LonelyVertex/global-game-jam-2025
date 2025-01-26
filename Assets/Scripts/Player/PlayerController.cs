@@ -381,10 +381,8 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("Player Killed");
         gameObject.GetComponentInChildren<PlayerBody>(true).gameObject.SetActive(false);
-        rb.linearVelocity = Vector2.zero;
-        rb.angularVelocity = 0.0f;
         killed = true;
-        spawnTime = 0.0f;
+        InitPlayerState();
 
         audioController.Death();
     }
@@ -398,8 +396,24 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Player Respawned");
             killed = false;
+            InitPlayerState();
             rb.position = spawnLocation.transform.position;
             gameObject.GetComponentInChildren<PlayerBody>(true).gameObject.SetActive(true);
         }
+    }
+
+    public void InitPlayerState()
+    {
+        weaponAmmo[WeaponType.Pistol] = 0;
+        weaponAmmo[WeaponType.RocketLauncher] = 0;
+        weaponAmmo[WeaponType.Shotgun] = 0;
+        weaponAmmo[WeaponType.Hands] = 0;
+        spawnTime = 0.0f;
+        divingTime = 0.0f;
+        divingEnabled = true;
+        SetUnderwater(false);
+        SetWeapon(WeaponType.Hands);
+        rb.linearVelocity = Vector2.zero;
+        rb.angularVelocity = 0.0f;
     }
 }
