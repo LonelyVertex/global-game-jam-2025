@@ -4,6 +4,7 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class GameStateManager : MonoBehaviour
 {
@@ -100,8 +101,14 @@ public class GameStateManager : MonoBehaviour
 
     private void OnPlayerScoreChanged(PlayerController player)
     {
-        PlayerUIControllers[player.PlayerIndex].SetKillsValue(player.GetScore());
+        var score = player.GetScore();
+        PlayerUIControllers[player.PlayerIndex].SetKillsValue(score);
         PlayerUIControllers[player.PlayerIndex].SetDeathsValue(player.GetDeathCount());
+
+        if (score >= ScoreToFinish) {
+            FinishGame();
+            PlayerUIControllers[player.PlayerIndex].SetWinner();
+        }
     }
 
 
@@ -167,6 +174,9 @@ public class GameStateManager : MonoBehaviour
     public void FinishGame()
     {
         State = GameState.FINISHED;
+        //Destroy all projectiles
+        var projectiles = FindObjectsOfType<ProjectileController>();
+        Array.ForEach(projectiles, p => p.DestroyProjectile());
     }
 
     public Transform GetSpawnPoint(int playerIndex)
