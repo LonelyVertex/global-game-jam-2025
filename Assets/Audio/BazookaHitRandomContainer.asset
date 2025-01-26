@@ -28,7 +28,7 @@ AudioContainerElement:
   m_PrefabAsset: {fileID: 0}
   m_Name: BazookaHit_02_{5572180900324683386}
   m_AudioClip: {fileID: 8300000, guid: e4345cffaa8f68d46b293e9c0ef8af15, type: 3}
-  m_Volume: 0
+  m_Volume: -5
   m_Enabled: 1
 --- !u!1307931743 &6418180475301049370
 AudioRandomContainer:
@@ -37,7 +37,7 @@ AudioRandomContainer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: BazookaHitRandomContainer
-  m_Volume: 0
+  m_Volume: -10
   m_Pitch: 0
   m_AutomaticTriggerTime: 0
   m_LoopCount: 1
@@ -67,5 +67,5 @@ AudioContainerElement:
   m_PrefabAsset: {fileID: 0}
   m_Name: BazookaHit_03_{7765836232161789490}
   m_AudioClip: {fileID: 8300000, guid: c27d410e2b25d85489ec7457dfabe3a4, type: 3}
-  m_Volume: 0
+  m_Volume: -5
   m_Enabled: 1
