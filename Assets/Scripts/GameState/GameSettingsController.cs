@@ -27,7 +27,6 @@ public class GameSettingsController : MonoBehaviour
 
     public static bool GetAIBotsEnabled()
     {
-        return PlayerPrefs.GetInt("aiBotsEnabled") > 0;
+        return PlayerPrefs.GetInt("aiBotsEnabled", defaultValue: 1) > 0;
     }
-
 }
